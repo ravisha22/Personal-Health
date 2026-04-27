@@ -3,116 +3,192 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0f172a">
-  <meta name="description" content="Personal Health Tracker — Track vitals, pain, gout flares, exercise, diet, and medications">
-  <title>Health Council</title>
+  <meta name="theme-color" content="#1e293b">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="description" content="Project workspace — under construction">
+  <title>Project Workspace</title>
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+  <!-- Decoy favicon — generic -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚧</text></svg>">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/tokens.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <style>
+    /* Decoy page styles — self-contained, no external CSS loaded */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f172a; color: #94a3b8; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .decoy { text-align: center; padding: 2rem; }
+    .decoy h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #e2e8f0; }
+    .decoy p { font-size: 1rem; max-width: 400px; line-height: 1.6; }
+    .decoy .icon { font-size: 4rem; margin-bottom: 1rem; }
+  </style>
 </head>
 <body>
-  <!-- Toast notifications -->
-  <div class="toast-container" id="toast-container"></div>
 
-  <!-- Main content area — pages render here -->
-  <main id="app"></main>
-
-  <!-- Bottom Navigation -->
-  <nav class="bottom-nav" id="bottom-nav" style="display:none;">
-    <a class="nav-item" href="#/dashboard" data-route="dashboard">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-      </svg>
-      <span>Home</span>
-    </a>
-    <a class="nav-item" href="#/log" data-route="log">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 20h9"></path>
-        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-      </svg>
-      <span>Log</span>
-    </a>
-    <a class="nav-item" href="#/progress" data-route="progress">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="20" x2="18" y2="10"></line>
-        <line x1="12" y1="20" x2="12" y2="4"></line>
-        <line x1="6" y1="20" x2="6" y2="14"></line>
-      </svg>
-      <span>Progress</span>
-    </a>
-    <a class="nav-item" href="#/goals" data-route="goals">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <circle cx="12" cy="12" r="6"></circle>
-        <circle cx="12" cy="12" r="2"></circle>
-      </svg>
-      <span>Goals</span>
-    </a>
-    <a class="nav-item" href="#/more" data-route="more">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="1"></circle>
-        <circle cx="19" cy="12" r="1"></circle>
-        <circle cx="5" cy="12" r="1"></circle>
-      </svg>
-      <span>More</span>
-    </a>
-  </nav>
-
-  <!-- FAB -->
-  <button class="fab" id="fab" style="display:none;" aria-label="Quick Log">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="12" y1="5" x2="12" y2="19"></line>
-      <line x1="5" y1="12" x2="19" y2="12"></line>
-    </svg>
-  </button>
-
-  <!-- FAB menu (hidden by default) -->
-  <div class="fab-menu" id="fab-menu" style="display:none;">
-    <a class="fab-menu-item" href="#/log/vitals">⚖️ Weight / BP</a>
-    <a class="fab-menu-item" href="#/log/pain">🩹 Pain</a>
-    <a class="fab-menu-item" href="#/log/flare">🔥 Gout Flare</a>
-    <a class="fab-menu-item" href="#/log/hydration">💧 Water</a>
-    <a class="fab-menu-item" href="#/log/checkin">📋 Check-in</a>
+  <!-- ===== DECOY PAGE (shown by default) ===== -->
+  <div class="decoy" id="decoy-page">
+    <div class="icon">🚧</div>
+    <h1>Under Construction</h1>
+    <p>This project workspace is currently being set up. Check back later.</p>
   </div>
 
-  <!-- Scripts — order matters -->
-  <script src="lib/dexie.min.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/store.js"></script>
-  <script src="js/data/body-parts.js"></script>
-  <script src="js/data/pain-reference.js"></script>
-  <script src="js/data/purine-guide.js"></script>
-  <script src="js/data/drug-interactions.js"></script>
-  <script src="js/safety.js"></script>
-  <script src="js/app.js"></script>
+  <!-- ===== REAL APP (hidden until authenticated) ===== -->
+  <div id="app-shell" style="display:none;">
+    <!-- Toast notifications -->
+    <div class="toast-container" id="toast-container"></div>
 
-  <!-- Page scripts -->
-  <script src="js/pages/onboarding.js"></script>
-  <script src="js/pages/dashboard.js"></script>
-  <script src="js/pages/log-vitals.js"></script>
-  <script src="js/pages/log-pain.js"></script>
-  <script src="js/pages/log-flare.js"></script>
-  <script src="js/pages/log-workout.js"></script>
-  <script src="js/pages/log-meal.js"></script>
-  <script src="js/pages/log-hydration.js"></script>
-  <script src="js/pages/log-checkin.js"></script>
-  <script src="js/pages/log.js"></script>
-  <script src="js/pages/goals.js"></script>
-  <script src="js/pages/medications.js"></script>
-  <script src="js/pages/progress.js"></script>
-  <script src="js/pages/more.js"></script>
-  <script src="js/pages/reference.js"></script>
-  <script src="js/pages/doctor-export.js"></script>
-  <script src="js/pages/export-import.js"></script>
-  <script src="js/pages/settings.js"></script>
-  <script src="js/pages/labs.js"></script>
+    <!-- Main content area -->
+    <main id="app"></main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav" id="bottom-nav" style="display:none;">
+      <a class="nav-item" href="#/dashboard" data-route="dashboard">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Home</span>
+      </a>
+      <a class="nav-item" href="#/log" data-route="log">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+        <span>Log</span>
+      </a>
+      <a class="nav-item" href="#/progress" data-route="progress">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Progress</span>
+      </a>
+      <a class="nav-item" href="#/goals" data-route="goals">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="6"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+        </svg>
+        <span>Goals</span>
+      </a>
+      <a class="nav-item" href="#/more" data-route="more">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="1"></circle>
+          <circle cx="19" cy="12" r="1"></circle>
+          <circle cx="5" cy="12" r="1"></circle>
+        </svg>
+        <span>More</span>
+      </a>
+    </nav>
+
+    <!-- FAB -->
+    <button class="fab" id="fab" style="display:none;" aria-label="Quick Log">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </button>
+
+    <!-- FAB menu -->
+    <div class="fab-menu" id="fab-menu" style="display:none;">
+      <a class="fab-menu-item" href="#/log/vitals">⚖️ Weight / BP</a>
+      <a class="fab-menu-item" href="#/log/pain">🩹 Pain</a>
+      <a class="fab-menu-item" href="#/log/flare">🔥 Gout Flare</a>
+      <a class="fab-menu-item" href="#/log/hydration">💧 Water</a>
+      <a class="fab-menu-item" href="#/log/checkin">📋 Check-in</a>
+    </div>
+  </div>
+
+  <!-- ===== SECURITY GATE ===== -->
+  <script>
+    // The app only loads if the correct access key is provided via URL param
+    // Usage: https://ravisha22.github.io/Personal-Health/?key=YOUR_SECRET
+    // Once authenticated, the key is stored in sessionStorage for the browser session
+    (function() {
+      const ACCESS_KEY = 'hc-r22-7x9m4q';
+
+      function isAuthenticated() {
+        // Check sessionStorage first (persists during browser session)
+        if (sessionStorage.getItem('hc_auth') === 'true') return true;
+
+        // Check URL parameter
+        const params = new URLSearchParams(window.location.search);
+        const key = params.get('key');
+        if (key === ACCESS_KEY) {
+          sessionStorage.setItem('hc_auth', 'true');
+          // Clean the URL (remove key param) to not expose it in browser history
+          const cleanUrl = window.location.pathname + (window.location.hash || '');
+          window.history.replaceState({}, '', cleanUrl);
+          return true;
+        }
+
+        return false;
+      }
+
+      if (!isAuthenticated()) {
+        // Show decoy, stop here — no CSS/JS loaded, no health data exposed
+        return;
+      }
+
+      // === AUTHENTICATED: Load the real app ===
+      document.getElementById('decoy-page').style.display = 'none';
+      document.getElementById('app-shell').style.display = 'block';
+
+      // Swap metadata
+      document.title = 'Health Council';
+      document.querySelector('link[rel="icon"]').href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>";
+
+      // Load CSS
+      const cssFiles = ['css/reset.css', 'css/tokens.css', 'css/layout.css', 'css/components.css', 'css/pages.css'];
+      cssFiles.forEach(href => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        document.head.appendChild(link);
+      });
+
+      // Load JS in order
+      const jsFiles = [
+        'lib/dexie.min.js',
+        'js/utils.js',
+        'js/store.js',
+        'js/data/body-parts.js',
+        'js/data/pain-reference.js',
+        'js/data/purine-guide.js',
+        'js/data/drug-interactions.js',
+        'js/safety.js',
+        'js/app.js',
+        'js/pages/onboarding.js',
+        'js/pages/dashboard.js',
+        'js/pages/log-vitals.js',
+        'js/pages/log-pain.js',
+        'js/pages/log-flare.js',
+        'js/pages/log-workout.js',
+        'js/pages/log-meal.js',
+        'js/pages/log-hydration.js',
+        'js/pages/log-checkin.js',
+        'js/pages/log.js',
+        'js/pages/goals.js',
+        'js/pages/medications.js',
+        'js/pages/progress.js',
+        'js/pages/more.js',
+        'js/pages/reference.js',
+        'js/pages/doctor-export.js',
+        'js/pages/export-import.js',
+        'js/pages/settings.js',
+        'js/pages/labs.js'
+      ];
+
+      let loadIndex = 0;
+      function loadNext() {
+        if (loadIndex >= jsFiles.length) return;
+        const script = document.createElement('script');
+        script.src = jsFiles[loadIndex];
+        script.onload = () => { loadIndex++; loadNext(); };
+        script.onerror = () => { console.error('Failed to load:', jsFiles[loadIndex]); loadIndex++; loadNext(); };
+        document.body.appendChild(script);
+      }
+      loadNext();
+    })();
+  </script>
 </body>
 </html>
