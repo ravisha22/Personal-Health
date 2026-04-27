@@ -1,59 +1,66 @@
 # Schema: Meals
 
-> Meal logging with gout + cholesterol awareness built in.
+> Each meal should explain gout risk, cholesterol quality, and hypertension impact at the same time.
 
 ```yaml
 ---
 schema: meals
-version: 1
+version: 2
 ---
 id: auto
 date: "YYYY-MM-DD"
 time: "HH:MM"
 meal_type: "breakfast|lunch|dinner|snack"
+description: ""
+items:
+  - name: "grilled chicken"
+    portion: "5 oz"
 
-description: ""                 # free-text meal description
-items:                          # optional itemized breakdown
-  - name: "grilled salmon"
-    portion: "6 oz"
-
-# ── Condition-Aware Fields ──
 purine_level: "low|medium|high"
-#   low:    most vegetables, fruits, dairy, eggs, bread
-#   medium: chicken, beans, mushrooms, oats
-#   high:   organ meats, shellfish, red meat, sardines, beer
-
-sat_fat_flag: false             # true if notably high in saturated fat
-sodium_est_mg: null             # estimated sodium (mg) — hypertension awareness
+purine_points: 0
+sodium_est_mg: null
+saturated_fat_g: null
+unsaturated_fat_g: null
+fiber_g: null
+high_fructose_flag: false
 alcohol: false
-alcohol_type: ""                # beer|wine|spirits — beer is worst for gout
+alcohol_type: "beer|wine|spirits|none"
 alcohol_servings: 0
-
-# ── Macros (estimated) ──
+mediterranean_score: 0
 calories_est: null
 protein_g: null
 carbs_g: null
 fat_g: null
-fiber_g: null
-
 notes: ""
 created_at: "ISO-8601"
 ```
 
-## Purine Reference Guide (embedded in app as constants)
+## Practical Scoring Rules
 
-| Category | Foods | Purine Content |
-|----------|-------|----------------|
-| **HIGH** (avoid/limit) | Organ meats, shellfish, sardines, anchovies, red meat, beer, high-fructose drinks | > 200 mg/100g |
-| **MEDIUM** (moderate) | Chicken, turkey, pork, beans, lentils, mushrooms, spinach, oatmeal | 100-200 mg/100g |
-| **LOW** (preferred) | Dairy, eggs, most fruits, most vegetables, whole grains, nuts, coffee, water | < 100 mg/100g |
+### Purine tracking
+- `low` = preferred baseline meal
+- `medium` = okay in moderation
+- `high` = gout-risk meal worth surfacing in weekly review
 
-## Sat Fat Flag Logic
+### Mediterranean score (0-5 simple meal score)
+Add 1 point each for:
+- vegetables or legumes present
+- fruit present
+- whole grains present
+- olive oil / nuts / unsaturated fat emphasis
+- lean or plant-forward protein choice
 
-Flag `sat_fat_flag: true` when a meal contains:
-- Fried foods
-- Full-fat cheese > 2 oz
-- Red meat > 4 oz
-- Processed meats (bacon, sausage)
-- Cream-based sauces
-- Baked goods with butter
+Subtract 1 practical point in dashboard warnings when:
+- sodium is very high
+- saturated fat is high
+- beer or sugar-sweetened beverage is present
+
+## Weekly Nutrition Metrics
+
+```text
+weekly_high_purine_count = count(meals where purine_level = 'high')
+weekly_avg_sodium = average(sodium_est_mg by day)
+weekly_avg_sat_fat = average(saturated_fat_g by day)
+weekly_avg_fiber = average(fiber_g by day)
+weekly_mediterranean_score = average(mediterranean_score)
+```

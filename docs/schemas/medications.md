@@ -1,26 +1,30 @@
 # Schema: Medications
 
-> Medication management with adherence tracking. Separate tables for medication definitions vs. daily adherence.
+> Medication adherence is a top-tier behavior for gout, cholesterol, and hypertension management.
 
 ## Medication Definition
 
 ```yaml
 ---
 schema: medications
-version: 1
+version: 2
 ---
 id: auto
 name: "Allopurinol"
 condition: "gout|cholesterol|hypertension|other"
+purpose: "urate_lowering|flare_rescue|statin|bp_control|other"
 dosage: "300mg"
 frequency: "once_daily|twice_daily|as_needed|weekly"
-time_of_day: "morning|evening|both|with_meals|bedtime"
+scheduled_windows:
+  - "am"
+requires_food: false
 prescribing_doctor: ""
 pharmacy: ""
 start_date: "YYYY-MM-DD"
-end_date: null                  # null if ongoing
+end_date: null
 active: true
-refill_date: "YYYY-MM-DD"      # next refill due
+refill_date: "YYYY-MM-DD"
+adherence_target_pct: 90
 side_effects_noted: ""
 notes: ""
 created_at: "ISO-8601"
@@ -32,31 +36,32 @@ updated_at: "ISO-8601"
 ```yaml
 ---
 schema: med_adherence
-version: 1
+version: 2
 ---
 id: auto
 date: "YYYY-MM-DD"
-medication_id: 1                # FK → medications.id
-taken: true
+medication_id: 1
+scheduled_window: "am|pm|bedtime|with_meal"
+status: "taken|missed|late|held"
 time_taken: "08:15"
-skipped_reason: ""              # forgot|side_effects|ran_out|doctor_advised|other
+late_by_min: 0
+skipped_reason: "forgot|side_effects|ran_out|doctor_advised|other"
 notes: ""
 created_at: "ISO-8601"
 ```
 
-## Expected Medication Stack
+## Condition-Specific Use
 
-| Condition | Typical Medication | Class | Key Monitoring |
-|-----------|-------------------|-------|----------------|
-| **Gout** | Allopurinol or Febuxostat | Xanthine oxidase inhibitor | Uric acid levels (target < 6.0) |
-| **Cholesterol** | Atorvastatin or Rosuvastatin | Statin | LDL, liver enzymes |
-| **Hypertension** | Lisinopril, Amlodipine, or Losartan | ACE-I / CCB / ARB | BP readings |
-| **Gout (acute)** | Colchicine or NSAIDs | Anti-inflammatory | Flare frequency |
+- **Gout prevention meds**: long-term adherence matters more than symptom-only logging.
+- **Flare meds**: should be easy to log during a flare event.
+- **Statin meds**: pair adherence with LDL trend review.
+- **BP meds**: pair adherence with AM/PM reading trends.
 
-## Adherence Metrics (computed)
+## Computed Metrics
 
-```
-streak_days = consecutive days WHERE taken = true (for a given medication_id)
-monthly_adherence_pct = (days_taken / days_in_month) * 100
-missed_last_7d = COUNT WHERE taken = false AND date >= today - 7
+```text
+all_active_med_adherence_7d = taken windows / scheduled windows
+condition_adherence_pct(condition) = adherence across active meds for that condition
+current_full_adherence_streak = consecutive days with all scheduled meds taken
+missed_bp_meds_last_7d = count(missed antihypertensive windows in last 7 days)
 ```

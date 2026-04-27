@@ -1,49 +1,43 @@
 # Schema: Workouts
 
-> Exercise tracking with gout joint awareness and cardio targets for hypertension.
+> Exercise should improve BP, cholesterol, and weight while staying realistic during gout-prone periods.
 
 ```yaml
 ---
 schema: workouts
-version: 1
+version: 2
 ---
 id: auto
 date: "YYYY-MM-DD"
 time: "HH:MM"
-type: "cardio|strength|flexibility|walking|swimming|cycling|yoga|other"
-name: ""                        # e.g., "Morning walk", "Upper body strength"
+name: "Brisk walk"
+session_focus: "cardio|strength|mobility|recovery"
+type: "walking|cycling|swimming|strength|yoga|elliptical|other"
 duration_min: 30
 intensity: "low|moderate|vigorous"
-
-# ── Cardiovascular ──
-avg_heart_rate: null            # bpm if tracked
-max_heart_rate: null
+impact_level: "low|medium|high"
+joint_safe: true
+gout_modification_used: false
+avg_heart_rate: null
 calories_est: null
-
-# ── Gout Awareness ──
-joints_stressed:                # joints bearing load — correlate with flares
+hydration_extra_oz: 16
+joints_stressed:
   - "ankle"
-  - "knee"
-
-# ── Weekly Target Tracking (computed) ──
-# AHA recommendation: 150 min moderate cardio OR 75 min vigorous per week
-# weekly_cardio_min = SUM(duration_min WHERE intensity IN ('moderate','vigorous') AND date IN current_week)
-
 notes: ""
 created_at: "ISO-8601"
 ```
 
-## Exercise Intensity Guide
+## Weekly Fitness Scorecard
 
-| Intensity | Heart Rate Zone | Examples | Gout Risk |
-|-----------|----------------|----------|-----------|
-| **Low** | 50-60% max HR | Stretching, slow walk, yoga | Very low |
-| **Moderate** | 60-70% max HR | Brisk walk, light cycling, swimming | Low |
-| **Vigorous** | 70-85% max HR | Running, HIIT, heavy lifting | Moderate — can spike uric acid via dehydration and lactic acid |
+```text
+weekly_cardio_min = sum(duration where session_focus = 'cardio')
+weekly_strength_sessions = count(session_focus = 'strength')
+weekly_joint_safe_sessions = count(joint_safe = true)
+exercise_consistency_streak = consecutive weeks with target activity met
+```
 
-## Gout-Exercise Precautions
+## Coaching Logic
 
-- Sudden intense exercise can trigger flares (lactic acid competes with uric acid for excretion)
-- Hydrate extra 16-24 oz for sessions > 30 min
-- Avoid exercise during active flare
-- Low-impact preferred: swimming, cycling, walking
+- Prefer **walking, cycling, swimming, elliptical, and mobility** during gout-risk weeks.
+- Count **strength sessions** separately so metabolism support is visible.
+- Reward **modified sessions** during flare-prone periods instead of treating them as failures.

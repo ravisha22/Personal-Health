@@ -1,49 +1,51 @@
 # Schema: Vitals
 
-> Weight, blood pressure, resting heart rate. Multiple entries per day allowed.
+> Weight is the shared metric. Blood pressure is the hypertension metric. Both need better context than a single raw number.
 
 ```yaml
 ---
 schema: vitals
-version: 1
+version: 2
 ---
 id: auto
 date: "YYYY-MM-DD"
 time: "HH:MM"
 type: "weight|bp|heart_rate"
 
-# Polymorphic values based on type:
-
-# type: weight
-value_primary: 195.5           # weight in preferred unit
+# Shared values
+value_primary: null
 value_secondary: null
-unit: "lbs"
-
-# type: bp
-value_primary: 128             # systolic
-value_secondary: 82            # diastolic
-unit: "mmHg"
-
-# type: heart_rate
-value_primary: 72              # bpm
-value_secondary: null
-unit: "bpm"
-
-# context
-position: "seated|standing|lying"   # BP-specific
-fasting: false                       # weight-specific — morning fasted weight?
+unit: "lbs|mmHg|bpm"
 notes: ""
 created_at: "ISO-8601"
+
+# Weight context
+fasting: false
+weigh_in_reason: "routine|post_flare|doctor_visit|other"
+
+# BP context
+reading_window: "am|pm|other"
+before_medication: true
+rested_min: 5
+position: "seated|standing|lying"
+cuff_arm: "left|right"
+symptoms:
+  - "headache"
+  - "dizziness"
 ```
 
-## BP Classification Reference (AHA)
+## Computed Metrics That Matter
 
-| Category    | Systolic     | Diastolic   |
-|-------------|-------------|-------------|
-| Normal      | < 120       | < 80        |
-| Elevated    | 120-129     | < 80        |
-| Stage 1 HTN | 130-139    | 80-89       |
-| Stage 2 HTN | ≥ 140      | ≥ 90        |
-| Crisis      | > 180       | > 120       |
+```text
+avg_am_bp_7d = average(bp where reading_window = 'am' over last 7 days)
+avg_pm_bp_7d = average(bp where reading_window = 'pm' over last 7 days)
+bp_in_range_pct_30d = days with avg BP <= target / logged days
+weight_change_30d = latest_weight - weight_30_days_ago
+rolling_weight_avg_7d = average(weight over last 7 days)
+```
 
-The app should color-code BP entries based on this table.
+## Dashboard Use
+
+- Show **AM vs PM BP split**, not one blended number only.
+- Show **7-day weight average** to reduce reaction to day-to-day swings.
+- Flag **BP drifting higher after high-stress or high-sodium days**.

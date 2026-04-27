@@ -1,0 +1,251 @@
+/* pages.css — Page-specific styles */
+
+/* ===== Bottom Navigation ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 50;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-2);
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  transition: color var(--transition-fast);
+  border-radius: var(--radius);
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: var(--color-primary);
+}
+
+.nav-item.active {
+  font-weight: var(--font-medium);
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* ===== FAB (Floating Action Button) ===== */
+.fab {
+  position: fixed;
+  bottom: calc(var(--nav-height) + var(--space-4));
+  right: var(--space-4);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  z-index: 40;
+  transition: transform var(--transition-fast);
+}
+
+.fab:hover { transform: scale(1.05); }
+.fab:active { transform: scale(0.95); }
+
+/* FAB menu */
+.fab-menu {
+  position: fixed;
+  bottom: calc(var(--nav-height) + var(--space-4) + 64px);
+  right: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: 40;
+  animation: fadeIn var(--transition-fast);
+}
+
+.fab-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.fab-menu-item:hover {
+  background: var(--color-surface-raised);
+}
+
+/* ===== Dashboard ===== */
+.dashboard-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.dashboard-section {
+  margin-bottom: var(--space-6);
+}
+
+.dashboard-section-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-3);
+}
+
+/* ===== Onboarding ===== */
+.onboarding {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--space-8));
+  padding: var(--space-6) var(--space-4);
+}
+
+.onboarding-progress {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.onboarding-dot {
+  height: 4px;
+  flex: 1;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-raised);
+  transition: background var(--transition-base);
+}
+
+.onboarding-dot.active {
+  background: var(--color-primary);
+}
+
+.onboarding-dot.complete {
+  background: var(--color-success);
+}
+
+.onboarding-content {
+  flex: 1;
+}
+
+.onboarding-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-2);
+}
+
+.onboarding-subtitle {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.onboarding-footer {
+  padding-top: var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* ===== Log Entry ===== */
+.log-entry {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.log-entry:last-child {
+  border-bottom: none;
+}
+
+.log-entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-1);
+}
+
+.log-entry-date {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.log-entry-value {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+}
+
+/* ===== Section list (for More / Settings) ===== */
+.section-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.section-list-item:last-child {
+  border-bottom: none;
+}
+
+.section-list-item:hover {
+  color: var(--color-primary);
+}
+
+.section-list-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-text-muted);
+}
+
+.section-list-label {
+  flex: 1;
+}
+
+.section-list-chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-muted);
+}
+
+/* ===== Disclaimer banner ===== */
+.disclaimer {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-6);
+}
+
+.disclaimer strong {
+  color: var(--color-text-secondary);
+}

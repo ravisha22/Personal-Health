@@ -1,67 +1,64 @@
 # Schema: Flares (Gout-Specific)
 
-> Log gout flare events with trigger analysis and treatment tracking.
+> The flare log should help answer: what happened, where, how severe, what likely triggered it, and what helped.
 
 ```yaml
 ---
 schema: flares
-version: 1
+version: 2
 ---
 id: auto
 date: "YYYY-MM-DD"
 time_onset: "HH:MM"
-
-# ── Location & Severity ──
-joint: "big_toe|ankle|knee|wrist|finger|elbow|midfoot|other"
-side: "left|right|bilateral"
-severity: 7                     # 1-10 scale
+primary_joint: "big_toe|ankle|knee|midfoot|wrist|finger|elbow|other"
+affected_joints:
+  - "left_big_toe"
+severity: 7
 swelling: "none|mild|moderate|severe"
 redness: "none|mild|moderate|severe"
-
-# ── Duration ──
-duration_hours: null            # filled when resolved
+mobility_limit: "none|mild|moderate|severe"
 resolved: false
 resolved_date: null
-
-# ── Trigger Analysis ──
+duration_hours: null
 suspected_triggers:
-  - "diet"                      # high-purine meal in last 48h
-  - "alcohol"                   # especially beer
-  - "dehydration"               # low water intake
-  - "exercise"                  # intense workout
-  - "stress"                    # high stress period
-  - "weather"                   # barometric pressure change
-  - "medication_change"         # dose adjustment
+  - "high_purine_meal"
+  - "alcohol"
+  - "dehydration"
+  - "stress"
+  - "hard_workout"
+  - "missed_medication"
   - "unknown"
-
-# ── 48-Hour Lookback (auto-populated from other tables) ──
-preceding_48h:
-  high_purine_meals: 2          # count from meals table
-  alcohol_servings: 3           # sum from meals table
-  avg_hydration_oz: 45          # avg daily oz from hydration table
-  exercise_intensity: "vigorous" # max intensity from workouts table
-  sleep_avg_hours: 5.5          # from checkins table
-  stress_avg: 4                 # from checkins table
-
-# ── Treatment ──
-treatment_used: "rest|ice|nsaid|colchicine|prednisone|other"
-treatment_details: ""
-pain_at_treatment_start: 7      # severity when treatment began
-pain_after_24h: 4               # severity 24h after treatment
-
+pre_flare_snapshot:
+  high_purine_meals_48h: 0
+  alcohol_servings_48h: 0
+  avg_hydration_48h_oz: 0
+  avg_sodium_48h_mg: 0
+  vigorous_sessions_48h: 0
+  avg_stress_48h: 0
+  missed_urate_lowering_doses_7d: 0
+treatment_used:
+  - "rest"
+  - "ice"
+  - "colchicine"
+response_after_24h: "better|same|worse"
 notes: ""
 created_at: "ISO-8601"
 ```
 
-## Flare Pattern Analysis (computed in useInsights.js)
+## Computed Review Metrics
 
+```text
+days_since_last_flare = today - latest(flare.date)
+flare_frequency_90d = count(flares in last 90 days)
+avg_flare_severity_90d = average(severity in last 90 days)
+most_common_trigger = mode(suspected_triggers)
+most_common_joint = mode(primary_joint)
 ```
-flare_frequency_90d = COUNT(flares) WHERE date >= today - 90
-avg_severity = AVG(severity) over last N flares
-most_common_joint = MODE(joint) over all flares
-most_common_trigger = MODE(suspected_triggers[]) over all flares
-avg_resolution_hours = AVG(duration_hours) WHERE resolved = true
 
-// Correlation: high-purine meals → flare within 48h
-purine_flare_correlation = flares with preceding_48h.high_purine_meals > 0 / total_flares
-```
+## High-Value Dashboard Outputs
+
+- Days since last flare
+- Top trigger this quarter
+- Average severity trend
+- Common joint involved
+- Whether missed meds or dehydration are recurring pre-flare patterns
