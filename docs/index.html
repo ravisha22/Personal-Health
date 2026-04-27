@@ -11,17 +11,16 @@
   <!-- Decoy favicon — generic -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚧</text></svg>">
 
-  <style>
-    /* Decoy page styles — self-contained, no external CSS loaded */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f172a; color: #94a3b8; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  <style id="decoy-styles">
+    /* Decoy page styles — self-contained, removed when app loads */
+    body.decoy-mode { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f172a; color: #94a3b8; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
     .decoy { text-align: center; padding: 2rem; }
     .decoy h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #e2e8f0; }
     .decoy p { font-size: 1rem; max-width: 400px; line-height: 1.6; }
     .decoy .icon { font-size: 4rem; margin-bottom: 1rem; }
   </style>
 </head>
-<body>
+<body class="decoy-mode">
 
   <!-- ===== DECOY PAGE (shown by default) ===== -->
   <div class="decoy" id="decoy-page">
@@ -133,6 +132,11 @@
       document.getElementById('decoy-page').style.display = 'none';
       document.getElementById('app-shell').style.display = 'block';
 
+      // Remove decoy styles completely
+      document.body.classList.remove('decoy-mode');
+      const decoyStyle = document.getElementById('decoy-styles');
+      if (decoyStyle) decoyStyle.remove();
+
       // Swap metadata
       document.title = 'Health Council';
       document.querySelector('link[rel="icon"]').href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>";
@@ -180,7 +184,11 @@
 
       let loadIndex = 0;
       function loadNext() {
-        if (loadIndex >= jsFiles.length) return;
+        if (loadIndex >= jsFiles.length) {
+          // All scripts loaded — start the app
+          App.start();
+          return;
+        }
         const script = document.createElement('script');
         script.src = jsFiles[loadIndex];
         script.onload = () => { loadIndex++; loadNext(); };

@@ -102,7 +102,11 @@ const App = {
   }
 };
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  App.init();
-});
+// Initialize when called (not on DOMContentLoaded — security gate handles timing)
+App.start = function() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => App.init());
+  } else {
+    App.init();
+  }
+};
