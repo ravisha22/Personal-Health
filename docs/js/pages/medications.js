@@ -262,22 +262,27 @@ App.register('medications', {
       if (e.target.classList.contains('adherence-check')) {
         const medId = e.target.dataset.medId;
         const taken = e.target.checked;
-        const today = Utils.dateStr(new Date());
+        const today = Utils.dateStr();
 
-        if (taken) {
-          await Store.add('adherence', {
-            id: Utils.uid(),
-            medicationId: medId,
-            date: today,
-            time: new Date().toTimeString().slice(0, 5),
-            createdAt: new Date().toISOString()
-          });
-        } else {
-          const existing = await Store.getByDate('adherence', today);
-          const adherenceRecord = existing.find(a => a.medicationId === medId);
-          if (adherenceRecord) {
-            await Store.delete('adherence', adherenceRecord.id);
+        try {
+          if (taken) {
+            await Store.add('med_adherence', {
+              medicationId: medId,
+              date: today,
+              time: new Date().toTimeString().slice(0, 5)
+            });
+            Utils.toast('Marked as taken ✅', 'success');
+          } else {
+            const existing = await Store.getByDate('med_adherence', today);
+            const record = existing.find(a => a.medicationId === medId);
+            if (record) {
+              await Store.delete('med_adherence', record.id);
+            }
+            Utils.toast('Unmarked', 'info');
           }
+        } catch(err) {
+          console.error('Adherence error:', err);
+          Utils.toast('Error saving adherence', 'danger');
         }
       }
     });

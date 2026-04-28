@@ -171,14 +171,14 @@ App.register('log/flare', {
 
         try {
             // Get food lookback before saving
-            const flareDate = new Date(formData.date);
-            const meals = await Store.getMealsForTriggerLookback(flareDate);
+            var flareDateStr = formData.date || Utils.dateStr();
+            const meals = await Store.getMealsForTriggerLookback(flareDateStr);
             
             // Save flare entry
             const savedFlare = await Store.addFlare(formData);
 
             // Display food lookback
-            this.displayFoodLookback(meals, flareDate);
+            this.displayFoodLookback(meals, flareDateStr);
 
             Utils.toast('Flare log saved successfully!', 'success');
 
@@ -198,17 +198,25 @@ App.register('log/flare', {
     },
 
     gatherFormData() {
+        var dateEl = document.getElementById('flareDate');
+        var dateVal = dateEl ? dateEl.value : '';
+        var dateStr;
+        try {
+            dateStr = dateVal ? new Date(dateVal).toISOString().split('T')[0] : Utils.dateStr();
+        } catch(e) {
+            dateStr = Utils.dateStr();
+        }
         return {
             id: Utils.uid(),
-            date: new Date(document.getElementById('flareDate').value).toISOString(),
-            severity: parseInt(document.getElementById('severity').value),
+            date: dateStr,
+            severity: parseInt(document.getElementById('severity').value) || 5,
             joints: Array.from(document.querySelectorAll('#affectedJoints input:checked'))
                 .map(cb => cb.value),
             suspectedTriggers: Array.from(document.querySelectorAll('#suspectedTriggers input:checked'))
                 .map(cb => cb.value),
             treatment: Array.from(document.querySelectorAll('#treatment input:checked'))
                 .map(cb => cb.value),
-            notes: document.getElementById('notes').value || null
+            notes: document.getElementById('notes') ? document.getElementById('notes').value : ''
         };
     },
 
@@ -220,58 +228,40 @@ App.register('log/flare', {
         return true;
     },
 
-    displayFoodLookback(meals, flareDate) {
+    displayFoodLookback(meals, flareDateStr) {
         const lookbackDiv = document.getElementById('foodLookback');
+        if (!lookbackDiv) return;
         
-        if (meals.length === 0) {
-            lookbackDiv.innerHTML = `
-                <div class="card">
-                    <h4>48-Hour Food Lookback</h4>
-                    <p class="text-muted">No meals recorded in the 48 hours before this flare.</p>
-                </div>
-            `;
+        if (!meals || meals.length === 0) {
+            lookbackDiv.innerHTML = '<div class="card"><h4>48-Hour Food Lookback</h4><p class="text-muted">No meals recorded in the 48 hours before this flare.</p></div>';
         } else {
-            const mealsHtml = meals.map(meal => {
-                const mealDate = new Date(meal.date);
-                const hoursAgo = Math.round((flareDate - mealDate) / (1000 * 60 * 60));
-                
-                return `
-                    <div class="card mb-2">
-                        <div class="flex justify-between items-center mb-2">
-                            <strong>${meal.type}</strong>
-                            <span class="text-sm text-muted">${hoursAgo}h ago</span>
-                        </div>
-                        <p>${Utils.escapeHtml(meal.foodItems || 'No details recorded')}</p>
-                        ${meal.goutTriggers && meal.goutTriggers.length > 0 ? `
-                            <div class="gap-2">
-                                ${meal.goutTriggers.map(trigger => {
-                                    const triggerInfo = PurineGuide.triggers.find(t => t.id === trigger);
-                                    const riskClass = triggerInfo ? `tag-${triggerInfo.risk === 'high' ? 'red' : triggerInfo.risk === 'moderate' ? 'yellow' : 'green'}` : '';
-                                    return `<span class="tag ${riskClass}">${triggerInfo ? triggerInfo.label : trigger}</span>`;
-                                }).join(' ')}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }).join('');
-
-            lookbackDiv.innerHTML = `
-                <div class="card">
-                    <h4>48-Hour Food Lookback</h4>
-                    <p class="text-muted mb-4">Meals consumed in the 48 hours before this flare:</p>
-                    ${mealsHtml}
-                </div>
-            `;
+            var flareD = new Date(flareDateStr + 'T00:00:00');
+            var h = '<div class="card"><h4>48-Hour Food Lookback</h4>';
+            for (var i = 0; i < meals.length; i++) {
+                var meal = meals[i];
+                var mealD = new Date((meal.date || '') + 'T00:00:00');
+                var hoursAgo = Math.max(0, Math.round((flareD - mealD) / (1000 * 60 * 60)));
+                h += '<div class="log-entry">';
+                h += '<div class="log-entry-header"><strong>' + Utils.escapeHtml(meal.type || meal.meal || 'Meal') + '</strong>';
+                h += '<span class="text-sm text-muted">' + hoursAgo + 'h ago</span></div>';
+                if (meal.items) h += '<span class="text-sm">' + Utils.escapeHtml(typeof meal.items === 'string' ? meal.items : (meal.items || []).join(', ')) + '</span>';
+                h += '</div>';
+            }
+            h += '</div>';
+            lookbackDiv.innerHTML = h;
         }
-        
         lookbackDiv.style.display = 'block';
     },
 
     resetForm() {
-        document.getElementById('flareForm').reset();
-        document.getElementById('flareDate').value = new Date().toISOString().slice(0, 16);
-        document.getElementById('severity').value = '5';
-        document.getElementById('nsaidWarning').style.display = 'none';
-        this.setupSeveritySlider();
+        var form = document.getElementById('flareForm');
+        if (form) form.reset();
+        var dateEl = document.getElementById('flareDate');
+        if (dateEl) dateEl.value = new Date().toISOString().slice(0, 16);
+        var sevEl = document.getElementById('severity');
+        if (sevEl) sevEl.value = '5';
+        var nsaidEl = document.getElementById('nsaidWarning');
+        if (nsaidEl) nsaidEl.style.display = 'none';
+        if (this.setupSeveritySlider) this.setupSeveritySlider();
     }
 });
