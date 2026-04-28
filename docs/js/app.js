@@ -72,8 +72,8 @@ const App = {
     // Initial navigation
     if (!Utils.isOnboarded()) {
       window.location.hash = '#/onboarding';
-    } else if (!window.location.hash || window.location.hash === '#/' || window.location.hash === '#') {
-      window.location.hash = '#/dashboard';
+    } else if (!window.location.hash || window.location.hash === '#/' || window.location.hash === '#' || window.location.hash === '#/dashboard') {
+      window.location.hash = '#/today';
     }
 
     this.navigate();

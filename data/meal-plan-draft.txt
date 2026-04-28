@@ -1,0 +1,989 @@
+Agent completed. agent_id: council-meal-data, agent_type: general-purpose, status: completed, description: Council: Meal data with recipes, elapsed: 346s, total_turns: 0, model: gpt-5.4, duration: 346s
+
+```javascript
+var RecipeLibrary = {
+  'protein-moong-adai': {
+    name: 'Protein Oats-Moong Adai',
+    cuisine: 'South Indian',
+    prepTime: '15 min',
+    cookTime: '10 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Rolled oats', qty: '40g' },
+      { item: 'Yellow moong dal, soaked', qty: '50g' },
+      { item: 'Curd', qty: '60g' },
+      { item: 'Grated carrot', qty: '40g' },
+      { item: 'Onion, chopped', qty: '30g' },
+      { item: 'Ginger', qty: '1 tsp' },
+      { item: 'Cumin seeds', qty: '1/2 tsp' },
+      { item: 'Oil', qty: '1 tsp' },
+      { item: 'Egg whites, boiled', qty: '2' }
+    ],
+    method: [
+      'Blend soaked moong, oats, ginger, cumin and a little water into a thick batter.',
+      'Mix in onion, carrot and salt.',
+      'Spread 2 small adai on a hot tawa, drizzle oil and cook both sides.',
+      'Serve hot with plain curd and 2 boiled egg whites.'
+    ],
+    nutrition: { calories: 530, protein: 35, carbs: 62, fat: 11 },
+    why: 'High-protein breakfast with familiar South Indian flavor and good satiety.',
+    tags: ['high-protein', 'fiber-rich', 'family-friendly'],
+    sourceUrl: 'https://www.vegrecipesofindia.com/adai-recipe/',
+    sourceLabel: "Dassana's Veg Recipes",
+    placeholder: true
+  },
+
+  'brown-rice-sambar-plate': {
+    name: 'Brown Rice Sambar Plate with Eggs',
+    cuisine: 'South Indian',
+    prepTime: '15 min',
+    cookTime: '25 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Cooked brown rice', qty: '180g' },
+      { item: 'Sambar', qty: '1.5 cups' },
+      { item: 'Boiled eggs', qty: '2' },
+      { item: 'Vegetable poriyal', qty: '1/2 cup' },
+      { item: 'Ghee', qty: '1 tsp' }
+    ],
+    method: [
+      'Warm the brown rice and sambar.',
+      'Plate rice, pour over sambar and add the poriyal on the side.',
+      'Top with 1 tsp ghee if desired.',
+      'Serve with 2 boiled eggs.'
+    ],
+    nutrition: { calories: 610, protein: 29, carbs: 86, fat: 16 },
+    why: 'Comforting lunch that keeps South Indian favorites while pushing protein up.',
+    tags: ['balanced', 'meal-prep', 'family-friendly'],
+    sourceUrl: 'https://www.swasthi.recipes/sambar-recipe/',
+    sourceLabel: "Swasthi's Recipes",
+    placeholder: true
+  },
+
+  'hung-curd-cherry-bowl': {
+    name: 'Hung Curd Cherry Protein Bowl',
+    cuisine: 'Fusion',
+    prepTime: '10 min',
+    cookTime: '0 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Hung curd or thick Greek yogurt', qty: '220g' },
+      { item: 'Cherries or mixed berries', qty: '80g' },
+      { item: 'Roasted pumpkin seeds', qty: '10g' },
+      { item: 'Honey', qty: '1 tsp' },
+      { item: 'Cinnamon', qty: '1 pinch' }
+    ],
+    method: [
+      'Whisk the hung curd until creamy.',
+      'Top with cherries, pumpkin seeds and cinnamon.',
+      'Drizzle honey lightly and serve chilled.'
+    ],
+    nutrition: { calories: 260, protein: 23, carbs: 22, fat: 8 },
+    why: 'A sweet snack that still delivers strong protein and feels like dessert.',
+    tags: ['high-protein', 'quick', 'sweet-snack'],
+    sourceUrl: 'https://feelgoodfoodie.net/recipe/fruit-yogurt-parfait/',
+    sourceLabel: 'Feel Good Foodie',
+    placeholder: true
+  },
+
+  'bottle-gourd-moong-soup': {
+    name: 'Bottle Gourd Moong Soup',
+    cuisine: 'Indian',
+    prepTime: '10 min',
+    cookTime: '20 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Bottle gourd, cubed', qty: '250g' },
+      { item: 'Yellow moong dal', qty: '45g' },
+      { item: 'Onion, chopped', qty: '40g' },
+      { item: 'Ginger', qty: '1 tsp' },
+      { item: 'Cumin seeds', qty: '1/2 tsp' },
+      { item: 'Curd on the side', qty: '100g' },
+      { item: 'Oil or ghee', qty: '1 tsp' }
+    ],
+    method: [
+      'Pressure cook bottle gourd, moong dal, onion, ginger, cumin and salt until soft.',
+      'Blend lightly or mash for a thick soup consistency.',
+      'Simmer for 2 to 3 minutes and finish with a small tempering if desired.',
+      'Serve warm with plain curd on the side.'
+    ],
+    nutrition: { calories: 340, protein: 22, carbs: 34, fat: 10 },
+    why: 'Light, soothing dinner that is easier on reflux than spicy late-night meals.',
+    tags: ['light-dinner', 'reflux-friendly', 'comfort-food'],
+    sourceUrl: 'https://www.archanaskitchen.com/recipe/south-indian-style-sorakkai-kootu-recipe-bottle-gourd-cooked-with-lentils-recipe',
+    sourceLabel: "Archana's Kitchen",
+    placeholder: true
+  },
+
+  'banana-snack': {
+    name: 'Banana Pre-Workout Snack',
+    cuisine: 'Universal',
+    prepTime: '1 min',
+    cookTime: '0 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Banana', qty: '1 medium' }
+    ],
+    method: [
+      'Peel and eat 30 to 45 minutes before training.'
+    ],
+    nutrition: { calories: 110, protein: 1, carbs: 27, fat: 0 },
+    why: 'Fast-digesting carbs for training without heavy stomach load.',
+    tags: ['pre-workout', 'quick', 'travel-friendly'],
+    sourceUrl: '',
+    sourceLabel: 'Homestyle',
+    placeholder: true
+  },
+
+  'curd-eggwhite-recovery': {
+    name: 'Curd and Egg White Recovery Cup',
+    cuisine: 'Indian',
+    prepTime: '5 min',
+    cookTime: '8 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Curd', qty: '180g' },
+      { item: 'Egg whites, boiled and chopped', qty: '3' },
+      { item: 'Black pepper', qty: '1 pinch' },
+      { item: 'Roasted cumin powder', qty: '1 pinch' },
+      { item: 'Salt', qty: 'to taste' }
+    ],
+    method: [
+      'Boil the eggs and separate the whites.',
+      'Mix curd with cumin, pepper and salt.',
+      'Top with chopped egg whites and eat within 60 minutes after training.'
+    ],
+    nutrition: { calories: 180, protein: 18, carbs: 10, fat: 5 },
+    why: 'Simple recovery option with protein, calcium and very little prep.',
+    tags: ['post-workout', 'high-protein', 'quick'],
+    sourceUrl: '',
+    sourceLabel: 'Homestyle',
+    placeholder: true
+  },
+
+  'shakshuka-pita': {
+    name: 'Simple Shakshuka with Whole Wheat Pita',
+    cuisine: 'Mediterranean',
+    prepTime: '10 min',
+    cookTime: '15 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Eggs', qty: '3' },
+      { item: 'Tomato puree', qty: '180g' },
+      { item: 'Onion, chopped', qty: '50g' },
+      { item: 'Bell pepper, chopped', qty: '60g' },
+      { item: 'Garlic', qty: '2 cloves' },
+      { item: 'Olive oil', qty: '2 tsp' },
+      { item: 'Whole wheat pita', qty: '1 small' },
+      { item: 'Feta', qty: '20g' }
+    ],
+    method: [
+      'Saute onion, bell pepper and garlic in olive oil.',
+      'Add tomato puree, cumin, paprika, chili flakes and simmer until thick.',
+      'Make 3 wells, crack in eggs and cover until just set.',
+      'Finish with feta and serve with warm whole wheat pita.'
+    ],
+    nutrition: { calories: 520, protein: 27, carbs: 42, fat: 24 },
+    why: 'Big flavor, very family-friendly and a good protein breakfast-for-dinner option too.',
+    tags: ['mediterranean', 'eggs', 'one-pan'],
+    sourceUrl: 'https://www.loveandlemons.com/shakshuka-recipe/',
+    sourceLabel: 'Love and Lemons'
+  },
+
+  'rajma-quinoa-bowl': {
+    name: 'Rajma Quinoa Bowl',
+    cuisine: 'North Indian Fusion',
+    prepTime: '15 min',
+    cookTime: '25 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Cooked rajma masala', qty: '1 cup' },
+      { item: 'Cooked quinoa', qty: '150g' },
+      { item: 'Curd', qty: '100g' },
+      { item: 'Cucumber, chopped', qty: '50g' },
+      { item: 'Onion, chopped', qty: '30g' },
+      { item: 'Lemon juice', qty: '1 tsp' }
+    ],
+    method: [
+      'Warm the rajma and quinoa.',
+      'Assemble in a bowl with cucumber and onion salad.',
+      'Add curd on the side and finish with lemon.'
+    ],
+    nutrition: { calories: 590, protein: 27, carbs: 78, fat: 17 },
+    why: 'Rajma stays family-favorite, while quinoa lifts fiber and protein a bit.',
+    tags: ['high-fiber', 'meal-bowl', 'north-indian'],
+    sourceUrl: 'https://www.vegrecipesofindia.com/rajma-masala-recipe-restaurant-style/',
+    sourceLabel: "Dassana's Veg Recipes",
+    placeholder: true
+  },
+
+  'chana-sundal-cup': {
+    name: 'Chana Sundal Cup',
+    cuisine: 'South Indian',
+    prepTime: '10 min',
+    cookTime: '10 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Cooked white chickpeas', qty: '140g' },
+      { item: 'Coconut, grated', qty: '1 tbsp' },
+      { item: 'Mustard seeds', qty: '1/4 tsp' },
+      { item: 'Urad dal', qty: '1/2 tsp' },
+      { item: 'Curry leaves', qty: '1 sprig' },
+      { item: 'Dry red chili', qty: '1' },
+      { item: 'Coconut oil', qty: '1 tsp' }
+    ],
+    method: [
+      'Heat coconut oil and splutter mustard, urad dal, red chili and curry leaves.',
+      'Add cooked chickpeas, salt and toss well.',
+      'Finish with grated coconut and serve warm.'
+    ],
+    nutrition: { calories: 240, protein: 11, carbs: 30, fat: 8 },
+    why: 'Traditional snack with better protein and fiber than packaged savory snacks.',
+    tags: ['south-indian', 'snack', 'fiber-rich'],
+    sourceUrl: 'https://www.vegrecipesofindia.com/chana-sundal/',
+    sourceLabel: "Dassana's Veg Recipes"
+  },
+
+  'paneer-tikka-wrap': {
+    name: 'Paneer Tikka Wrap',
+    cuisine: 'Indian Fusion',
+    prepTime: '15 min',
+    cookTime: '15 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Paneer', qty: '120g' },
+      { item: 'Hung curd', qty: '2 tbsp' },
+      { item: 'Tandoori masala', qty: '1 tsp' },
+      { item: 'Whole wheat wraps', qty: '2 small' },
+      { item: 'Onion and capsicum, sliced', qty: '80g' },
+      { item: 'Mint chutney', qty: '1 tbsp' },
+      { item: 'Oil', qty: '2 tsp' }
+    ],
+    method: [
+      'Marinate paneer in hung curd, tandoori masala, salt and chili for 10 minutes.',
+      'Pan-cook paneer with onion and capsicum until lightly charred.',
+      'Fill 2 small whole wheat wraps with mint chutney and paneer mixture.',
+      'Roll and serve.'
+    ],
+    nutrition: { calories: 560, protein: 34, carbs: 42, fat: 26 },
+    why: 'Restaurant-style taste without much effort; strong protein for lunch.',
+    tags: ['high-protein', 'wrap', 'family-friendly'],
+    sourceUrl: 'https://www.vegrecipesofindia.com/paneer-tikka-recipe-paneer-tikka/',
+    sourceLabel: "Dassana's Veg Recipes",
+    placeholder: true
+  },
+
+  'greek-yogurt-fruit-parfait': {
+    name: 'Greek Yogurt Fruit Parfait',
+    cuisine: 'Western',
+    prepTime: '10 min',
+    cookTime: '0 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Greek yogurt', qty: '220g' },
+      { item: 'Mixed fruit', qty: '120g' },
+      { item: 'Granola', qty: '30g' },
+      { item: 'Chia seeds', qty: '1 tsp' },
+      { item: 'Honey', qty: '1 tsp' }
+    ],
+    method: [
+      'Layer Greek yogurt, fruit and granola in a bowl or glass.',
+      'Top with chia seeds and a little honey.',
+      'Serve immediately so the granola stays crisp.'
+    ],
+    nutrition: { calories: 350, protein: 24, carbs: 38, fat: 10 },
+    why: 'Easy, tasty and kid-friendly; works as breakfast or snack.',
+    tags: ['high-protein', 'sweet', 'no-cook'],
+    sourceUrl: 'https://feelgoodfoodie.net/recipe/fruit-yogurt-parfait/',
+    sourceLabel: 'Feel Good Foodie'
+  },
+
+  'tofu-miso-stirfry-rice': {
+    name: 'Tofu Miso Stir-Fry with Rice',
+    cuisine: 'Asian',
+    prepTime: '15 min',
+    cookTime: '15 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Extra-firm tofu', qty: '180g' },
+      { item: 'Cooked rice', qty: '150g' },
+      { item: 'Bell pepper, sliced', qty: '80g' },
+      { item: 'Snap peas or beans', qty: '80g' },
+      { item: 'White miso paste', qty: '1 tbsp' },
+      { item: 'Soy sauce', qty: '2 tsp' },
+      { item: 'Sesame oil', qty: '1 tsp' },
+      { item: 'Oil', qty: '2 tsp' }
+    ],
+    method: [
+      'Pan-sear tofu until golden.',
+      'Stir-fry vegetables quickly so they stay crisp.',
+      'Mix miso, soy and a splash of water, then toss with tofu and vegetables.',
+      'Serve with cooked rice.'
+    ],
+    nutrition: { calories: 560, protein: 30, carbs: 52, fat: 24 },
+    why: 'A fast Asian-style dinner that stays high-protein and not boring.',
+    tags: ['asian', 'high-protein', 'quick-dinner'],
+    sourceUrl: 'https://www.connoisseurusveg.com/veggie-miso-tofu-stir-fry/',
+    sourceLabel: 'Connoisseurus Veg'
+  },
+
+  'masala-omelette-toast': {
+    name: 'Masala Omelette with Toast',
+    cuisine: 'Indian / Western',
+    prepTime: '8 min',
+    cookTime: '10 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Eggs', qty: '3' },
+      { item: 'Onion, chopped', qty: '40g' },
+      { item: 'Tomato, deseeded and chopped', qty: '30g' },
+      { item: 'Capsicum, chopped', qty: '30g' },
+      { item: 'Coriander leaves', qty: '1 tbsp' },
+      { item: 'Whole wheat bread', qty: '2 slices' },
+      { item: 'Butter or oil', qty: '2 tsp' }
+    ],
+    method: [
+      'Beat eggs with onion, tomato, capsicum, coriander, salt and pepper.',
+      'Cook a thick omelette on medium heat with a little oil or butter.',
+      'Toast the bread and serve alongside.'
+    ],
+    nutrition: { calories: 430, protein: 27, carbs: 28, fat: 22 },
+    why: 'Fast, familiar and easy to scale for the whole family.',
+    tags: ['eggs', 'quick-breakfast', 'family-friendly'],
+    sourceUrl: 'https://www.indianhealthyrecipes.com/omelette/',
+    sourceLabel: "Swasthi's Recipes"
+  },
+
+  'paneer-bhurji-wrap': {
+    name: 'Paneer Bhurji Wrap',
+    cuisine: 'Indian Fusion',
+    prepTime: '10 min',
+    cookTime: '12 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Paneer, crumbled', qty: '120g' },
+      { item: 'Onion, chopped', qty: '40g' },
+      { item: 'Tomato, chopped', qty: '50g' },
+      { item: 'Capsicum, chopped', qty: '40g' },
+      { item: 'Whole wheat wraps', qty: '2 small' },
+      { item: 'Oil', qty: '2 tsp' },
+      { item: 'Spices and coriander', qty: 'as needed' }
+    ],
+    method: [
+      'Saute onion, tomato and capsicum with spices.',
+      'Add crumbled paneer and cook until just combined.',
+      'Fill 2 small wraps and roll tightly.',
+      'Toast briefly on the pan if you want extra texture.'
+    ],
+    nutrition: { calories: 540, protein: 32, carbs: 41, fat: 25 },
+    why: 'Street-food flavor but still simple, protein-rich and lunchbox friendly.',
+    tags: ['wrap', 'high-protein', 'indian-fusion'],
+    sourceUrl: 'https://hebbarskitchen.com/easy-dry-paneer-bhurji-recipe/',
+    sourceLabel: 'Hebbars Kitchen',
+    placeholder: true
+  },
+
+  'veggie-egg-fried-rice': {
+    name: 'Veggie Egg Fried Rice',
+    cuisine: 'Asian',
+    prepTime: '10 min',
+    cookTime: '12 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Cooked rice', qty: '180g' },
+      { item: 'Eggs', qty: '3' },
+      { item: 'Onion, chopped', qty: '40g' },
+      { item: 'Carrot, chopped', qty: '40g' },
+      { item: 'Beans or peas', qty: '40g' },
+      { item: 'Soy sauce', qty: '2 tsp' },
+      { item: 'Oil', qty: '2 tsp' },
+      { item: 'Spring onion', qty: '1 tbsp' }
+    ],
+    method: [
+      'Scramble the eggs first and keep aside.',
+      'Stir-fry onion and vegetables in oil.',
+      'Add rice, soy sauce and scrambled egg, then toss on high heat.',
+      'Finish with spring onion.'
+    ],
+    nutrition: { calories: 560, protein: 24, carbs: 61, fat: 22 },
+    why: 'Great family-pleaser and a smart way to use leftover rice.',
+    tags: ['asian', 'leftover-friendly', 'family-friendly'],
+    sourceUrl: 'https://www.bbcgoodfood.com/recipes/egg-fried-rice',
+    sourceLabel: 'BBC Good Food',
+    placeholder: true
+  },
+
+  'chole-paneer-salad-bowl': {
+    name: 'Chole Paneer Salad Bowl',
+    cuisine: 'North Indian Fusion',
+    prepTime: '12 min',
+    cookTime: '10 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Cooked chole', qty: '1 cup' },
+      { item: 'Paneer, cubed', qty: '80g' },
+      { item: 'Cucumber, chopped', qty: '70g' },
+      { item: 'Tomato, chopped', qty: '70g' },
+      { item: 'Onion, chopped', qty: '30g' },
+      { item: 'Mint-coriander chutney', qty: '1 tbsp' },
+      { item: 'Lemon juice', qty: '1 tsp' }
+    ],
+    method: [
+      'Warm the chole and lightly pan-sear paneer cubes.',
+      'Assemble with chopped vegetables in a bowl.',
+      'Add chutney, lemon and a pinch of chaat masala.'
+    ],
+    nutrition: { calories: 520, protein: 31, carbs: 48, fat: 20 },
+    why: 'Chole stays familiar, while paneer boosts protein without much cooking.',
+    tags: ['high-protein', 'north-indian', 'meal-bowl'],
+    sourceUrl: 'https://www.indianhealthyrecipes.com/chole/',
+    sourceLabel: "Swasthi's Recipes",
+    placeholder: true
+  },
+
+  'moong-dal-khichdi-curd': {
+    name: 'Moong Dal Khichdi with Curd',
+    cuisine: 'Indian',
+    prepTime: '10 min',
+    cookTime: '20 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Rice', qty: '60g raw' },
+      { item: 'Yellow moong dal', qty: '50g raw' },
+      { item: 'Onion, chopped', qty: '30g' },
+      { item: 'Tomato, chopped', qty: '40g' },
+      { item: 'Ghee', qty: '2 tsp' },
+      { item: 'Cumin and turmeric', qty: 'as needed' },
+      { item: 'Curd', qty: '120g' }
+    ],
+    method: [
+      'Saute cumin, onion and tomato in ghee.',
+      'Add washed rice, moong dal, turmeric, salt and water.',
+      'Pressure cook until soft and creamy.',
+      'Serve with curd.'
+    ],
+    nutrition: { calories: 500, protein: 24, carbs: 68, fat: 14 },
+    why: 'Soft, easy dinner that still gives solid protein and comfort.',
+    tags: ['comfort-food', 'easy-digest', 'meal-prep'],
+    sourceUrl: 'https://www.vegrecipesofindia.com/moong-dal-khichdi-recipe/',
+    sourceLabel: "Dassana's Veg Recipes"
+  },
+
+  'mediterranean-orzo-chickpea-salad': {
+    name: 'Mediterranean Orzo Chickpea Salad',
+    cuisine: 'Mediterranean',
+    prepTime: '15 min',
+    cookTime: '10 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Cooked orzo', qty: '140g' },
+      { item: 'Cooked chickpeas', qty: '100g' },
+      { item: 'Feta', qty: '35g' },
+      { item: 'Cucumber, chopped', qty: '70g' },
+      { item: 'Tomato, chopped', qty: '70g' },
+      { item: 'Olives, sliced', qty: '15g' },
+      { item: 'Olive oil', qty: '2 tsp' },
+      { item: 'Lemon juice', qty: '1 tbsp' }
+    ],
+    method: [
+      'Cook orzo and cool slightly.',
+      'Mix with chickpeas, vegetables, feta and olives.',
+      'Dress with olive oil, lemon, salt and pepper.'
+    ],
+    nutrition: { calories: 530, protein: 22, carbs: 63, fat: 19 },
+    why: 'Fresh, colorful and family-friendly without feeling like diet food.',
+    tags: ['mediterranean', 'meal-prep', 'vegetarian'],
+    sourceUrl: 'https://www.loveandlemons.com/orzo-salad/',
+    sourceLabel: 'Love and Lemons',
+    placeholder: true
+  },
+
+  'southwest-tofu-scramble-toast': {
+    name: 'Southwest Tofu Scramble Toast',
+    cuisine: 'Western / Fusion',
+    prepTime: '10 min',
+    cookTime: '12 min',
+    servings: 1,
+    difficulty: 'Easy',
+    ingredients: [
+      { item: 'Extra-firm tofu', qty: '180g' },
+      { item: 'Onion, chopped', qty: '40g' },
+      { item: 'Bell pepper, chopped', qty: '50g' },
+      { item: 'Spinach or kale', qty: '40g' },
+      { item: 'Turmeric, cumin and chili powder', qty: 'as needed' },
+      { item: 'Whole wheat bread', qty: '2 slices' },
+      { item: 'Oil', qty: '2 tsp' }
+    ],
+    method: [
+      'Saute onion and bell pepper in oil.',
+      'Crumble in tofu, add spices and cook until lightly dry.',
+      'Fold in spinach briefly.',
+      'Serve with toast.'
+    ],
+    nutrition: { calories: 430, protein: 28, carbs: 27, fat: 21 },
+    why: 'Quick, savory and very practical on busy mornings.',
+    tags: ['high-protein', 'quick-breakfast', 'tofu'],
+    sourceUrl: 'https://minimalistbaker.com/southwest-tofu-scramble/',
+    sourceLabel: 'Minimalist Baker'
+  }
+};
+
+var MealPlan = {
+  days: [
+    {
+      dayNumber: 1,
+      label: 'Monday',
+      isGymDay: true,
+      totalsIncludeWorkoutFuel: true,
+      meals: [
+        {
+          type: 'breakfast',
+          time: '9:00 AM',
+          recipeId: 'protein-moong-adai',
+          notes: 'Good on heavy training mornings; keep batter slightly thick.',
+          isGymDay: true
+        },
+        {
+          type: 'lunch',
+          time: '1:00 PM',
+          recipeId: 'brown-rice-sambar-plate',
+          notes: 'Use extra vegetables in sambar for fullness.',
+          isGymDay: true
+        },
+        {
+          type: 'snack',
+          time: '4:30 PM',
+          recipeId: 'hung-curd-cherry-bowl',
+          notes: 'Sweet enough to replace biscuits or bakery snacks.',
+          isGymDay: true
+        },
+        {
+          type: 'dinner',
+          time: '7:00 PM',
+          recipeId: 'bottle-gourd-moong-soup',
+          notes: 'Keep dinner mild to support reflux control.',
+          isGymDay: true
+        }
+      ],
+      dailyTotals: { calories: 2030, protein: 128, carbs: 241, fat: 50 },
+      preWorkout: {
+        recipeId: 'banana-snack',
+        notes: '30-45 min before gym.'
+      },
+      postWorkout: {
+        recipeId: 'curd-eggwhite-recovery',
+        notes: 'Within 60 min after workout.'
+      }
+    },
+
+    {
+      dayNumber: 2,
+      label: 'Tuesday',
+      isGymDay: true,
+      totalsIncludeWorkoutFuel: true,
+      meals: [
+        {
+          type: 'breakfast',
+          time: '9:00 AM',
+          recipeId: 'shakshuka-pita',
+          notes: 'Serve family-style in one pan.',
+          isGymDay: true
+        },
+        {
+          type: 'lunch',
+          time: '1:00 PM',
+          recipeId: 'paneer-tikka-wrap',
+          notes: 'Pack easily for office or school lunch.',
+          isGymDay: true
+        },
+        {
+          type: 'snack',
+          time: '4:30 PM',
+          recipeId: 'chana-sundal-cup',
+          notes: 'Lemon squeeze makes it brighter.',
+          isGymDay: true
+        },
+        {
+          type: 'dinner',
+          time: '7:00 PM',
+          recipeId: 'tofu-miso-stirfry-rice',
+          notes: 'Keep spice moderate at dinner if reflux is sensitive.',
+          isGymDay: true
+        }
+      ],
+      dailyTotals: { calories: 2170, protein: 121, carbs: 203, fat: 87 },
+      preWorkout: {
+        recipeId: 'banana-snack',
+        notes: 'Keep it simple; no heavy fats before gym.'
+      },
+      postWorkout: {
+        recipeId: 'curd-eggwhite-recovery',
+        notes: 'Use chilled curd if workout ends in the evening heat.'
+      }
+    },
+
+    {
+      dayNumber: 3,
+      label: 'Wednesday',
+      isGymDay: false,
+      totalsIncludeWorkoutFuel: false,
+      meals: [
+        {
+          type: 'breakfast',
+          time: '9:00 AM',
+          recipeId: 'protein-moong-adai',
+          notes: 'Still works well on rest day because it keeps hunger stable.',
+          isGymDay: false
+        },
+        {
+          type: 'lunch',
+          time: '1:00 PM',
+          recipeId: 'rajma-quinoa-bowl',
+          notes: 'Good meal-prep lunch; add cucumber generously.',
+          isGymDay: false
+        },
+        {
+          type: 'snack',
+          time: '4:30 PM',
+          recipeId: 'greek-yogurt-fruit-parfait',
+          notes: 'Great day for a sweeter snack.',
+          isGymDay: false
+        },
+        {
+          type: 'dinner',
+          time: '7:00 PM',
+          recipeId: 'paneer-bhurji-wrap',
+          notes: 'Use less chili at dinner if needed.',
+          isGymDay: false
+        }
+      ],
+      dailyTotals: { calories: 2010, protein: 118, carbs: 219, fat: 63 },
+      preWorkout: {
+        recipeId: 'banana-snack',
+        notes: 'Optional only if you do an evening walk or light activity; not counted in totals.'
+      },
+      postWorkout: {
+        recipeId: 'curd-eggwhite-recovery',
+        notes: 'Optional only if you train; not counted in totals.'
+      }
+    },
+
+    {
+      dayNumber: 4,
+      label: 'Thursday',
+      isGymDay: true,
+      totalsIncludeWorkoutFuel: true,
+      meals: [
+        {
+          type: 'breakfast',
+          time: '9:00 AM',
+          recipeId: 'southwest-tofu-scramble-toast',
+          notes: 'Nice change from Indian breakfast without losing protein.',
+          isGymDay: true
+        },
+        {
+          type: 'lunch',
+          time: '1:00 PM',
+          recipeId: 'mediterranean-orzo-chickpea-salad',
+          notes: 'Best served slightly chilled or room temperature.',
+          isGymDay: true
+        },
+        {
+          type: 'snack',
+          time: '4:30 PM',
+          recipeId: 'hung-curd-cherry-bowl',
+          notes: 'Keeps cravings under control before evening training.',
+          isGymDay: true
+        },
+        {
+          type: 'dinner',
+          time: '7:00 PM',
+          recipeId: 'chole-paneer-salad-bowl',
+          notes: 'Skip extra onions at night if reflux is acting up.',
+          isGymDay: true
+        }
+      ],
+      dailyTotals: { calories: 2030, protein: 123, carbs: 197, fat: 73 },
+      preWorkout: {
+        recipeId: 'banana-snack',
+        notes: 'Have with water 30 minutes pre-gym.'
+      },
+      postWorkout: {
+        recipeId: 'curd-eggwhite-recovery',
+        notes: 'Simple protein top-up after training.'
+      }
+    },
+
+    {
+      dayNumber: 5,
+      label: 'Friday',
+      isGymDay: false,
+      totalsIncludeWorkoutFuel: false,
+      meals: [
+        {
+          type: 'breakfast',
+          time: '9:00 AM',
+          recipeId: 'protein-moong-adai',
+          notes: 'Repeat because it is efficient, filling and reliable.',
+          isGymDay: false
+        },
+        {
+          type: 'lunch',
+          time: '1:00 PM',
+          recipeId: 'paneer-tikka-wrap',
+          notes: 'Easy Friday lunch that still feels fun.',
+          isGymDay: false
+        },
+        {
+          type: 'snack',
+          time: '4:30 PM',
+          recipeId: 'greek-yogurt-fruit-parfait',
+          notes: 'Use lower-sugar granola if needed.',
+          isGymDay: false
+        },
+        {
+          type: 'dinner',
+          time: '7:00 PM',
+          recipeId: 'tofu-miso-stirfry-rice',
+          notes: 'Keep sauce lighter than restaurant stir-fries.',
+          isGymDay: false
+        }
+      ],
+      dailyTotals: { calories: 2000, protein: 123, carbs: 194, fat: 71 },
+      preWorkout: {
+        recipeId: 'banana-snack',
+        notes: 'Optional only if you add activity; not counted in totals.'
+      },
+      postWorkout: {
+        recipeId: 'curd-eggwhite-recovery',
+        notes: 'Optional only if you train; not counted in totals.'
+      }
+    },
+
+    {
+      dayNumber: 6,
+      label: 'Saturday',
+      isGymDay: true,
+      totalsIncludeWorkoutFuel: true,
+      meals: [
+        {
+          type: 'breakfast',
+          time: '9:00 AM',
+          recipeId: 'shakshuka-pita',
+          notes: 'Weekend breakfast that the whole family can share.',
+          isGymDay: true
+        },
+        {
+          type: 'lunch',
+          time: '1:00 PM',
+          recipeId: 'veggie-egg-fried-rice',
+          notes: 'Use leftover rice for best texture.',
+          isGymDay: true
+        },
+        {
+          type: 'snack',
+          time: '4:30 PM',
+          recipeId: 'hung-curd-cherry-bowl',
+          notes: 'Cool and easy on a busy weekend.',
+          isGymDay: true
+        },
+        {
+          type: 'dinner',
+          time: '7:00 PM',
+          recipeId: 'moong-dal-khichdi-curd',
+          notes: 'Comforting dinner after a harder workout day.',
+          isGymDay: true
+        }
+      ],
+      dailyTotals: { calories: 2130, protein: 117, carbs: 230, fat: 73 },
+      preWorkout: {
+        recipeId: 'banana-snack',
+        notes: 'Use as the only pre-workout food if breakfast was earlier.'
+      },
+      postWorkout: {
+        recipeId: 'curd-eggwhite-recovery',
+        notes: 'Good recovery when dinner is a bit later.'
+      }
+    },
+
+    {
+      dayNumber: 7,
+      label: 'Sunday',
+      isGymDay: false,
+      totalsIncludeWorkoutFuel: false,
+      meals: [
+        {
+          type: 'breakfast',
+          time: '9:00 AM',
+          recipeId: 'shakshuka-pita',
+          notes: 'Fun Sunday breakfast with strong flavor.',
+          isGymDay: false
+        },
+        {
+          type: 'lunch',
+          time: '1:00 PM',
+          recipeId: 'brown-rice-sambar-plate',
+          notes: 'A familiar home-style lunch to reset the week.',
+          isGymDay: false
+        },
+        {
+          type: 'snack',
+          time: '4:30 PM',
+          recipeId: 'greek-yogurt-fruit-parfait',
+          notes: 'Keep it lighter if lunch ran late.',
+          isGymDay: false
+        },
+        {
+          type: 'dinner',
+          time: '7:00 PM',
+          recipeId: 'paneer-bhurji-wrap',
+          notes: 'Finish dinner early and keep spice level moderate.',
+          isGymDay: false
+        }
+      ],
+      dailyTotals: { calories: 2020, protein: 112, carbs: 207, fat: 75 },
+      preWorkout: {
+        recipeId: 'banana-snack',
+        notes: 'Optional only for sports, long walk or evening activity; not counted in totals.'
+      },
+      postWorkout: {
+        recipeId: 'curd-eggwhite-recovery',
+        notes: 'Optional only if you train; not counted in totals.'
+      }
+    }
+  ],
+
+  groceryList: {
+    grains: [
+      'Brown rice - 1.5 kg',
+      'Quinoa - 500 g',
+      'Orzo - 400 g',
+      'Rolled oats - 500 g',
+      'Whole wheat atta - 2 kg',
+      'Whole wheat wraps - 12',
+      'Whole wheat bread - 1 loaf',
+      'Whole wheat pita - 4 to 6'
+    ],
+    protein: [
+      'Eggs - 30',
+      'Paneer - 1.2 kg',
+      'Extra-firm tofu - 1.5 kg',
+      'Greek yogurt / thick curd - 2.5 kg',
+      'Yellow moong dal - 1 kg',
+      'Rajma - 500 g',
+      'White chickpeas / chole - 1 kg',
+      'Hung curd - 500 g'
+    ],
+    vegetables: [
+      'Bottle gourd - 2 medium',
+      'Onions - 2 kg',
+      'Tomatoes - 2 kg',
+      'Bell peppers - 8',
+      'Cucumbers - 6',
+      'Carrots - 1 kg',
+      'Spinach or kale - 600 g',
+      'Snap peas or beans - 400 g',
+      'Curry leaves - 2 bunches',
+      'Coriander - 4 bunches',
+      'Mint - 2 bunches',
+      'Ginger - 250 g',
+      'Garlic - 200 g',
+      'Green chilies - 100 g',
+      'Spring onions - 2 bunches',
+      'Lemons - 10'
+    ],
+    fruits: [
+      'Bananas - 14',
+      'Cherries or mixed berries - 1 kg',
+      'Apples - 7',
+      'Oranges - 6',
+      'Pomegranate - 3',
+      'Any extra seasonal fruit for parfaits - 500 g'
+    ],
+    pantry: [
+      'Olive oil',
+      'Sesame oil',
+      'Ghee',
+      'Mustard seeds',
+      'Cumin seeds',
+      'Urad dal',
+      'Turmeric powder',
+      'Red chili powder',
+      'Black pepper',
+      'Paprika',
+      'Garam masala',
+      'Tandoori masala',
+      'Chole masala',
+      'Sambar powder',
+      'Soy sauce',
+      'White miso paste',
+      'Granola',
+      'Chia seeds',
+      'Pumpkin seeds',
+      'Tahini or ready hummus',
+      'Olives',
+      'Feta',
+      'Honey'
+    ]
+  },
+
+  rules: {
+    acidReflux: [
+      'Dinner by 7:00 PM whenever possible.',
+      'Finish the last meal at least 3 hours before bed.',
+      'Keep dinner lighter than lunch and avoid deep-fried sides at night.',
+      'Limit very spicy, very sour and tomato-heavy meals late in the evening.',
+      'Do not lie down immediately after eating; stay upright for at least 30 to 45 minutes.',
+      'Keep tea and coffee away from an empty stomach if that triggers symptoms.'
+    ],
+    goutTriggers: [
+      'No alcohol.',
+      'No meat, no fish, no organ meats.',
+      'Avoid sugary soft drinks and frequent binge desserts.',
+      'Stay well hydrated every day to support uric acid clearance.',
+      'Use eggs, paneer, tofu and moderate dal portions as primary protein anchors.',
+      'Avoid crash dieting, long fasting windows and dehydration.'
+    ],
+    hydration: [
+      'On waking: 500 ml water.',
+      'With breakfast morning window: 300 to 500 ml.',
+      'Mid-morning: 500 ml.',
+      'Pre-workout: 300 ml water 30 minutes before gym.',
+      'During workout: 400 to 600 ml sip by sip.',
+      'Lunch to afternoon: 700 ml.',
+      'Evening: 300 to 500 ml.',
+      'Daily target: about 2.7 to 3.2 liters total unless doctor advised otherwise.'
+    ],
+    proteinStrategy: [
+      'Aim for 25 to 35 g protein at each main meal.',
+      'Use the snack slot to rescue low-protein days.',
+      'If a day runs short, add 2 extra egg whites or 100 g curd rather than random snacking.',
+      'Prefer paneer, tofu, curd, eggs, rajma and chole over ultra-processed protein foods.'
+    ],
+    mealRhythm: [
+      'Keep breakfast and lunch substantial; keep dinner calmer and easier to digest.',
+      'Repeat high-success meals during busy weekdays rather than chasing variety for its own sake.',
+      'Batch-cook rajma, chole, sambar and boiled eggs to reduce weekday effort.',
+      'Use leftovers smartly: rice for fried rice, paneer bhurji for wraps, curd for quick protein bowls.'
+    ]
+  }
+};
+```
