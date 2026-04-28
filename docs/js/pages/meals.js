@@ -177,9 +177,14 @@
         }
       }
 
+      // Meal planner link
+      h += '<div class="card mb-4">';
+      h += '<a href="#/meal-planner" class="btn btn-primary btn-block">📋 Monthly Meal Planner — Pick & Export Recipes</a>';
+      h += '</div>';
+
       // Shopping list export button
       h += '<div class="card mb-4">';
-      h += '<div class="card-header"><h3 class="card-title">🛒 Shopping List</h3></div>';
+      h += '<div class="card-header"><h3 class="card-title">🛒 Quick Export</h3></div>';
       h += '<button class="btn btn-secondary btn-block btn-sm" id="export-grocery">Export Weekly Grocery List</button>';
       h += '</div>';
 
