@@ -12,8 +12,8 @@
  *   IDs are the part of a URL after "v=" (e.g. youtube.com/watch?v=XXXX).
  *   Where a confidently-correct, well-known tutorial could be identified
  *   it is referenced directly. Where uncertainty exists, the field is
- *   set to 'dQw4w9WgXcQ' and `placeholder: true` is added so the front-
- *   end can flag it for manual verification.
+ *   set to '' (empty string) so the front-end can hide the thumbnail
+ *   and flag it for manual verification.
  * ===================================================================== */
 
 /* ---------------------------------------------------------------------
@@ -31,8 +31,7 @@ var ExerciseLibrary = {
       'Light resistance, smooth circular pedalling',
       'Relaxed grip, upright torso'
     ],
-    youtubeId: 'dQw4w9WgXcQ',
-    placeholder: true,
+    youtubeId: '',
     goutModification: 'Excellent during flare — non-weight-bearing.'
   },
   'treadmill-walk': {
@@ -44,8 +43,7 @@ var ExerciseLibrary = {
       'Natural arm swing — DO NOT hold the rails',
       'Heel-strike to toe-off, full foot contact'
     ],
-    youtubeId: 'dQw4w9WgXcQ',
-    placeholder: true,
+    youtubeId: '',
     goutModification: 'Reduce speed to 3.5 km/hr or substitute bike during flare.'
   },
   'treadmill-cooldown': {
@@ -53,8 +51,7 @@ var ExerciseLibrary = {
     targetMuscles: ['Cardiovascular'],
     why: 'Gradually returns heart rate to baseline and prevents blood pooling.',
     formCues: ['Slow, conversational pace', 'Deep nasal breathing'],
-    youtubeId: 'dQw4w9WgXcQ',
-    placeholder: true,
+    youtubeId: '',
     goutModification: 'No change.'
   },
 
@@ -93,7 +90,6 @@ var ExerciseLibrary = {
       'Slow eccentric, no shrugging'
     ],
     youtubeId: 'gPAv95uvN0c',
-    placeholder: true,
     goutModification: 'No change.'
   },
   'glute-bridge-warmup': {
@@ -106,7 +102,6 @@ var ExerciseLibrary = {
       'Ribs down, no lumbar over-arch'
     ],
     youtubeId: 'wPM8icPu6H8',
-    placeholder: true,
     goutModification: 'No change — supine.'
   },
   'scapular-wall-slide': {
@@ -118,8 +113,7 @@ var ExerciseLibrary = {
       'Slide arms up keeping contact',
       'Stop at the point you lose contact'
     ],
-    youtubeId: 'dQw4w9WgXcQ',
-    placeholder: true,
+    youtubeId: '',
     goutModification: 'No change.'
   },
 
@@ -134,7 +128,6 @@ var ExerciseLibrary = {
       'Don\'t lock elbows at top'
     ],
     youtubeId: 'xUm0BiZfWrI',
-    placeholder: true,
     goutModification: 'No change — fully seated.'
   },
   'seated-shoulder-press-machine': {
@@ -147,7 +140,6 @@ var ExerciseLibrary = {
       'Control the eccentric (2 sec down)'
     ],
     youtubeId: 'Wqq43dKW1TU',
-    placeholder: true,
     goutModification: 'No change — seated.'
   },
   'cable-tricep-pushdown': {
@@ -160,7 +152,6 @@ var ExerciseLibrary = {
       'Full lock-out, slow return'
     ],
     youtubeId: '2-LAMcpzODU',
-    placeholder: true,
     goutModification: 'Perform seated on a bench if standing aggravates the foot.'
   },
   'db-lateral-raise': {
@@ -173,7 +164,6 @@ var ExerciseLibrary = {
       'Stop at shoulder height — no higher'
     ],
     youtubeId: 'OuG1smZTsQQ',
-    placeholder: true,
     goutModification: 'Perform seated on a bench during flare.'
   },
 
@@ -188,7 +178,6 @@ var ExerciseLibrary = {
       'Bar to upper chest, not behind the neck'
     ],
     youtubeId: 'CAwf7n6Luuc',
-    placeholder: true,
     goutModification: 'No change — seated.'
   },
   'seated-cable-row': {
@@ -201,7 +190,6 @@ var ExerciseLibrary = {
       'Squeeze blades together at end-range'
     ],
     youtubeId: 'GZbfZ033f74',
-    placeholder: true,
     goutModification: 'No change — seated.'
   },
   'machine-rear-delt-fly': {
@@ -214,7 +202,6 @@ var ExerciseLibrary = {
       'Squeeze blades at end of motion'
     ],
     youtubeId: 'GbjQbiHQOPg',
-    placeholder: true,
     goutModification: 'No change — seated.'
   },
   'db-bicep-curl': {
@@ -227,7 +214,6 @@ var ExerciseLibrary = {
       'Slow 2-sec eccentric'
     ],
     youtubeId: 'av7-8igSXTs',
-    placeholder: true,
     goutModification: 'Perform seated during flare.'
   },
   'face-pull': {
@@ -240,7 +226,6 @@ var ExerciseLibrary = {
       'External rotation at the end — \"draw the bow\"'
     ],
     youtubeId: 'rep-qVOkqgk',
-    placeholder: true,
     goutModification: 'No change.'
   },
 
@@ -255,7 +240,6 @@ var ExerciseLibrary = {
       'Do NOT lock the knees at the top'
     ],
     youtubeId: 'IZxyjW7MPJQ',
-    placeholder: true,
     goutModification: 'Place feet HIGHER on the platform to reduce ankle dorsiflexion and big-toe load.'
   },
   'leg-extension': {
@@ -268,7 +252,6 @@ var ExerciseLibrary = {
       'Slow 2-sec eccentric'
     ],
     youtubeId: 'YyvSfVjQeL0',
-    placeholder: true,
     goutModification: 'No change — seated, foot only contacts a pad.'
   },
   'lying-leg-curl': {
@@ -281,7 +264,6 @@ var ExerciseLibrary = {
       'Full curl, controlled return'
     ],
     youtubeId: '1Tq3QdYUuHs',
-    placeholder: true,
     goutModification: 'No change — prone.'
   },
   'hip-abduction-machine': {
@@ -294,7 +276,6 @@ var ExerciseLibrary = {
       'Slow return'
     ],
     youtubeId: 'k-fH8HmfOmk',
-    placeholder: true,
     goutModification: 'No change — seated.'
   },
   'standing-calf-raise': {
@@ -307,7 +288,6 @@ var ExerciseLibrary = {
       'No bouncing'
     ],
     youtubeId: 'YMmgqO8Jo-k',
-    placeholder: true,
     goutModification: 'SKIP entirely during flare — directly loads the big toe.'
   },
   'seated-calf-raise': {
@@ -320,7 +300,6 @@ var ExerciseLibrary = {
       'Slow tempo'
     ],
     youtubeId: 'JbyjNymZOt0',
-    placeholder: true,
     goutModification: 'Skip during big-toe flare.'
   },
   'romanian-deadlift-db': {
@@ -333,7 +312,6 @@ var ExerciseLibrary = {
       'Stop when you feel hamstring stretch — neutral spine'
     ],
     youtubeId: 'FQ-6acDhBoo',
-    placeholder: true,
     goutModification: 'Use lighter load and higher reps if foot is sensitive — load goes through mid-foot.'
   },
 
@@ -348,7 +326,6 @@ var ExerciseLibrary = {
       'Exhale as limbs extend'
     ],
     youtubeId: 'g_BYB0R-4Ws',
-    placeholder: true,
     goutModification: 'No change — supine.'
   },
   'bird-dog': {
@@ -361,7 +338,6 @@ var ExerciseLibrary = {
       '2-sec hold at extension'
     ],
     youtubeId: 'wiFNA3sqjCA',
-    placeholder: true,
     goutModification: 'No change — quadruped, no foot load.'
   },
   'side-plank': {
@@ -374,20 +350,20 @@ var ExerciseLibrary = {
       'Breathe — don\'t hold breath'
     ],
     youtubeId: 'K2VljzCC16g',
-    placeholder: true,
     goutModification: 'Drop to bottom knee during flare — bottom foot off the floor.'
   },
   'pallof-press': {
     name: 'Cable Pallof Press',
     targetMuscles: ['Obliques', 'Transverse Abdominis'],
     why: 'Anti-rotation core — translates directly to real-world stability.',
+    deprecated: true,
+    deprecatedNote: 'Removed from program — strains client\'s ankles in the standing stance. Replaced with bird-dog. Definition retained for reference only.',
     formCues: [
       'Cable at chest height, perpendicular to body',
       'Press straight out, resist rotation',
       '2-sec hold at full extension'
     ],
     youtubeId: 'AH_QZLm_0-s',
-    placeholder: true,
     goutModification: 'Perform half-kneeling with the affected foot back/unloaded.'
   },
   'cable-woodchop': {
@@ -400,7 +376,6 @@ var ExerciseLibrary = {
       'Control the return'
     ],
     youtubeId: 'iD_QvyXqCO0',
-    placeholder: true,
     goutModification: 'Replace with seated Russian twists during flare.'
   },
 
@@ -415,7 +390,6 @@ var ExerciseLibrary = {
       '30-sec hold per side'
     ],
     youtubeId: 'SI8-84tGhRM',
-    placeholder: true,
     goutModification: 'No change.'
   },
   'child-pose': {
@@ -428,7 +402,6 @@ var ExerciseLibrary = {
       'Reach arms long, forehead to floor'
     ],
     youtubeId: 'kH7TGXMXhg8',
-    placeholder: true,
     goutModification: 'Place a pillow under the ankles if dorsiflexion is painful.'
   },
   'figure-4-stretch': {
@@ -441,7 +414,6 @@ var ExerciseLibrary = {
       '30-sec hold per side'
     ],
     youtubeId: 'GxgnyL10Q08',
-    placeholder: true,
     goutModification: 'No change — supine, no foot load.'
   },
   'standing-quad-stretch': {
@@ -454,7 +426,6 @@ var ExerciseLibrary = {
       'Tuck the pelvis to deepen'
     ],
     youtubeId: 'LSO0HSdkBfQ',
-    placeholder: true,
     goutModification: 'Perform LYING on side during flare — no standing on bad foot.'
   },
   'hamstring-stretch-strap': {
@@ -467,7 +438,6 @@ var ExerciseLibrary = {
       '30-sec hold per side'
     ],
     youtubeId: 'oh9DfKxKTjk',
-    placeholder: true,
     goutModification: 'Place strap on mid-foot, NOT toes, during flare.'
   },
   'thoracic-foam-roll': {
@@ -480,7 +450,6 @@ var ExerciseLibrary = {
       '60–90 sec total'
     ],
     youtubeId: 'X9NyqEXNhrY',
-    placeholder: true,
     goutModification: 'No change.'
   }
 };
@@ -490,22 +459,17 @@ var ExerciseLibrary = {
  * 2. SHARED ROUTINES (warm-up & cool-down — identical every day)
  * ------------------------------------------------------------------- */
 var WarmupRoutine = [
-  { exerciseId: 'bike-warmup',         duration: '5 min',  notes: 'RPE 3-4, light spin to raise core temp' },
-  { exerciseId: 'cat-cow',             duration: '60 sec', notes: 'Slow, ~2 sec each direction' },
+  { exerciseId: 'bike-warmup',         duration: '3 min',  notes: 'RPE 3, easy spin to raise core temp' },
+  { exerciseId: 'cat-cow',             duration: '45 sec', notes: 'Slow, 2 sec each direction' },
   { exerciseId: 'glute-bridge-warmup', duration: '10 reps',notes: '2-sec squeeze at top' },
-  { exerciseId: 'scapular-wall-slide', duration: '10 reps',notes: 'Keep contact with the wall' },
-  { exerciseId: 'band-pull-apart',     duration: '15 reps',notes: 'Light band, slow tempo' },
-  { exerciseId: 'world-greatest-stretch', duration: '2/side', notes: 'Hold each rotation 2 sec' }
+  { exerciseId: 'band-pull-apart',     duration: '10 reps',notes: 'Light band, slow tempo' }
 ];
 
 var CooldownRoutine = [
-  { exerciseId: 'treadmill-cooldown',   duration: '2 min', notes: '3 km/hr, easy walk' },
-  { exerciseId: 'doorway-pec-stretch',  duration: '30s/side', notes: 'Chest open, no shoulder shrug' },
-  { exerciseId: 'child-pose',           duration: '60 sec',   notes: 'Deep nasal breathing' },
-  { exerciseId: 'figure-4-stretch',     duration: '30s/side', notes: 'Pull supporting thigh in' },
-  { exerciseId: 'standing-quad-stretch',duration: '30s/side', notes: 'Tuck pelvis to deepen' },
-  { exerciseId: 'hamstring-stretch-strap', duration: '30s/side', notes: 'Strap on mid-foot' },
-  { exerciseId: 'thoracic-foam-roll',   duration: '90 sec',   notes: 'Small extensions, exhale at end-range' }
+  { exerciseId: 'treadmill-cooldown',      duration: '2 min',    notes: '3 km/hr easy walk' },
+  { exerciseId: 'child-pose',              duration: '45 sec',   notes: 'Deep nasal breathing' },
+  { exerciseId: 'hamstring-stretch-strap', duration: '30s/side', notes: 'Gentle, no bouncing' },
+  { exerciseId: 'standing-quad-stretch',   duration: '30s/side', notes: 'Hold rail for balance' }
 ];
 
 
@@ -574,7 +538,7 @@ var _week4 = {
       ],
       [
         { exerciseId: 'dead-bug',     sets: 2, reps: '8/side', restSeconds: 45, rpe: '5', notes: 'Low back GLUED to floor' },
-        { exerciseId: 'pallof-press', sets: 2, reps: '10/side', restSeconds: 45, rpe: '6', notes: 'Resist rotation, 2-sec hold' }
+        { exerciseId: 'bird-dog', sets: 2, reps: '8/side', restSeconds: 45, rpe: '5', notes: '2-sec hold at extension, hips square' }
       ]
     ),
 
@@ -633,7 +597,7 @@ var _week4 = {
         { exerciseId: 'seated-shoulder-press-machine', sets: 2, reps: 12, weight: '12.5 kg', restSeconds: 75, rpe: '6', notes: 'Smooth path' }
       ],
       [
-        { exerciseId: 'pallof-press', sets: 2, reps: '10/side',     restSeconds: 45, rpe: '6', notes: 'Resist rotation' },
+        { exerciseId: 'bird-dog', sets: 2, reps: '8/side', restSeconds: 45, rpe: '5', notes: '2-sec hold at extension, hips square' },
         { exerciseId: 'side-plank',   sets: 2, reps: '20-sec/side', restSeconds: 45, rpe: '6', notes: 'Stack joints' }
       ]
     )
@@ -658,7 +622,7 @@ var _week5 = {
       ],
       [
         { exerciseId: 'dead-bug',     sets: 3, reps: '8/side',  restSeconds: 45, rpe: '6', notes: '+1 set' },
-        { exerciseId: 'pallof-press', sets: 2, reps: '12/side', restSeconds: 45, rpe: '6', notes: '+2 reps' }
+        { exerciseId: 'bird-dog', sets: 2, reps: '8/side', restSeconds: 45, rpe: '5', notes: '2-sec hold at extension, hips square' }
       ]
     ),
 
@@ -713,7 +677,7 @@ var _week5 = {
         { exerciseId: 'seated-shoulder-press-machine', sets: 2, reps: 12, weight: '15 kg', restSeconds: 75, rpe: '6', notes: '+2.5 kg' }
       ],
       [
-        { exerciseId: 'pallof-press', sets: 2, reps: '12/side',     restSeconds: 45, rpe: '6', notes: '+2 reps' },
+        { exerciseId: 'bird-dog', sets: 2, reps: '8/side', restSeconds: 45, rpe: '5', notes: '2-sec hold at extension, hips square' },
         { exerciseId: 'side-plank',   sets: 2, reps: '25-sec/side', restSeconds: 45, rpe: '6', notes: '+5 sec' }
       ]
     )
@@ -738,7 +702,7 @@ var _week6 = {
       ],
       [
         { exerciseId: 'dead-bug',     sets: 3, reps: '10/side', restSeconds: 45, rpe: '6', notes: '+2 reps' },
-        { exerciseId: 'pallof-press', sets: 3, reps: '12/side', restSeconds: 45, rpe: '7', notes: '+1 set' }
+        { exerciseId: 'bird-dog', sets: 2, reps: '8/side', restSeconds: 45, rpe: '5', notes: '2-sec hold at extension, hips square' }
       ]
     ),
 
@@ -794,7 +758,7 @@ var _week6 = {
         { exerciseId: 'seated-shoulder-press-machine', sets: 3, reps: 10, weight: '17.5 kg', restSeconds: 75, rpe: '6-7', notes: '+1 set, +2.5 kg' }
       ],
       [
-        { exerciseId: 'pallof-press', sets: 3, reps: '12/side',     restSeconds: 45, rpe: '7', notes: '+1 set' },
+        { exerciseId: 'bird-dog', sets: 2, reps: '8/side', restSeconds: 45, rpe: '5', notes: '2-sec hold at extension, hips square' },
         { exerciseId: 'side-plank',   sets: 3, reps: '25-sec/side', restSeconds: 45, rpe: '7', notes: '+1 set' }
       ]
     )
@@ -820,7 +784,7 @@ var _week7 = {
       ],
       [
         { exerciseId: 'dead-bug',     sets: 3, reps: '12/side', restSeconds: 45, rpe: '7', notes: '+2 reps' },
-        { exerciseId: 'pallof-press', sets: 3, reps: '15/side', restSeconds: 45, rpe: '7', notes: '+3 reps' }
+        { exerciseId: 'bird-dog', sets: 2, reps: '8/side', restSeconds: 45, rpe: '5', notes: '2-sec hold at extension, hips square' }
       ]
     ),
 
@@ -876,7 +840,7 @@ var _week7 = {
         { exerciseId: 'seated-shoulder-press-machine', sets: 3, reps: 12, weight: '15 kg', restSeconds: 75, rpe: '6-7', notes: 'Tempo 3-1-2' }
       ],
       [
-        { exerciseId: 'pallof-press', sets: 3, reps: '15/side',     restSeconds: 45, rpe: '7', notes: '+3 reps' },
+        { exerciseId: 'bird-dog', sets: 2, reps: '8/side', restSeconds: 45, rpe: '5', notes: '2-sec hold at extension, hips square' },
         { exerciseId: 'side-plank',   sets: 3, reps: '30-sec/side', restSeconds: 45, rpe: '7', notes: '+5 sec' }
       ]
     )

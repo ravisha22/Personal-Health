@@ -100,6 +100,15 @@
       h += '<p class="text-xs text-muted mb-4">📖 Search: ' + esc(r.sourceLabel) + '</p>';
     }
 
+    // South Indian alternative
+    if (r.southIndianAlt) {
+      var alt = recipe(r.southIndianAlt.recipeId);
+      h += '<div class="alert alert-info mb-4">';
+      h += '<strong>🍛 South Indian alternative:</strong> ' + esc(r.southIndianAlt.name || (alt && alt.name) || '');
+      if (alt && alt.nutrition) h += ' (' + alt.nutrition.calories + ' kcal, ' + alt.nutrition.protein + 'g protein)';
+      h += '</div>';
+    }
+
     // Notes
     if (meal.notes) h += '<p class="text-sm text-muted mb-2">📝 ' + esc(meal.notes) + '</p>';
 
@@ -162,10 +171,17 @@
         var powr = recipe(day.postWorkout.recipeId);
         if (powr) {
           h += '<div class="alert alert-success mb-4">💪 <strong>Post-Workout:</strong> ' + esc(powr.name);
+          if (powr.nutrition) h += ' (' + powr.nutrition.protein + 'g protein)';
           if (day.postWorkout.notes) h += ' — ' + esc(day.postWorkout.notes);
           h += '</div>';
         }
       }
+
+      // Shopping list export button
+      h += '<div class="card mb-4">';
+      h += '<div class="card-header"><h3 class="card-title">🛒 Shopping List</h3></div>';
+      h += '<button class="btn btn-secondary btn-block btn-sm" id="export-grocery">Export Weekly Grocery List</button>';
+      h += '</div>';
 
       h += '<div class="disclaimer"><strong>⚕️</strong> Finish dinner 3hrs before bed to prevent acid reflux.</div>';
       h += '</div>';
@@ -184,6 +200,59 @@
         currentDay = getDay() + 1;
         if (currentDay >= MealPlan.days.length) currentDay = 0;
         App.navigate();
+      };
+
+      // Grocery export
+      var exportBtn = document.getElementById('export-grocery');
+      if (exportBtn) exportBtn.onclick = function() {
+        var items = {};
+        // Consolidate all ingredients from all 7 days
+        for (var d = 0; d < MealPlan.days.length; d++) {
+          var day = MealPlan.days[d];
+          if (!day.meals) continue;
+          for (var m = 0; m < day.meals.length; m++) {
+            var r = recipe(day.meals[m].recipeId);
+            if (!r || !r.ingredients) continue;
+            for (var i = 0; i < r.ingredients.length; i++) {
+              var ing = r.ingredients[i];
+              var key = ing.item.toLowerCase();
+              if (!items[key]) items[key] = { name: ing.item, qty: ing.qty, count: 1 };
+              else items[key].count++;
+            }
+          }
+        }
+        // Also add grocery list if available
+        var text = '🛒 WEEKLY GROCERY LIST (Family of 4)\n';
+        text += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+
+        if (MealPlan.groceryList) {
+          var gl = MealPlan.groceryList;
+          var cats = Object.keys(gl);
+          for (var c = 0; c < cats.length; c++) {
+            text += cats[c].toUpperCase() + ':\n';
+            var catItems = gl[cats[c]];
+            for (var i = 0; i < catItems.length; i++) {
+              text += '  ☐ ' + catItems[i] + '\n';
+            }
+            text += '\n';
+          }
+        } else {
+          // Fallback: list consolidated ingredients
+          var sorted = Object.values(items).sort(function(a,b) { return a.name.localeCompare(b.name); });
+          for (var i = 0; i < sorted.length; i++) {
+            text += '☐ ' + sorted[i].name + ' — ' + sorted[i].qty + (sorted[i].count > 1 ? ' (used ' + sorted[i].count + 'x)' : '') + '\n';
+          }
+        }
+
+        // Download as text file
+        var blob = new Blob([text], { type: 'text/plain' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'grocery-list-week-' + new Date().toISOString().split('T')[0] + '.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+        Utils.toast('Grocery list downloaded!', 'success');
       };
     }
   });
