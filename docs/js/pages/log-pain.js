@@ -163,18 +163,22 @@ App.register('log/pain', {
             await Store.addPain(formData);
 
             // Check for red flags
-            const redFlags = Safety.checkPainRedFlags(formData);
-            const goutIndicators = Safety.checkGoutIndicators(formData);
+            const redFlags = Safety.checkPainRedFlags(
+                formData.painLevel || 0,
+                formData.visibleSigns || [],
+                formData.context || ''
+            );
+            const goutResult = Safety.checkGoutIndicators(formData);
 
-            this.displayAlerts(redFlags, goutIndicators);
+            this.displayAlerts(redFlags, goutResult);
 
             Utils.toast('Pain log saved successfully!', 'success');
 
             // Offer navigation to flare log if gout indicators
-            if (goutIndicators.length > 0) {
+            if (goutResult && goutResult.isLikelyGout) {
                 setTimeout(() => {
                     if (confirm('Gout indicators detected. Would you like to log this as a gout flare?')) {
-                        window.location.hash = '#log/flare';
+                        window.location.hash = '#/log/flare';
                         return;
                     }
                 }, 2000);
@@ -183,8 +187,8 @@ App.register('log/pain', {
             // Reset form and navigate back
             this.resetForm();
             setTimeout(() => {
-                window.location.hash = '#log';
-            }, goutIndicators.length > 0 ? 4000 : 1500);
+                window.location.hash = '#/log';
+            }, (goutResult && goutResult.isLikelyGout) ? 4000 : 1500);
 
         } catch (error) {
             console.error('Error saving pain log:', error);
@@ -215,16 +219,28 @@ App.register('log/pain', {
         return true;
     },
 
-    displayAlerts(redFlags, goutIndicators) {
+    displayAlerts(redFlags, goutResult) {
         const alertsDiv = document.getElementById('alerts');
+        if (!alertsDiv) return;
         alertsDiv.innerHTML = '';
 
-        [...redFlags, ...goutIndicators].forEach(alert => {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert ${alert.severity === 'high' ? 'alert-danger' : 'alert-warning'}`;
-            alertDiv.innerHTML = Safety.renderAlert(alert);
-            alertsDiv.appendChild(alertDiv);
-        });
+        // Show red flag alerts
+        if (redFlags && redFlags.length > 0) {
+            redFlags.forEach(function(alert) {
+                var div = document.createElement('div');
+                div.className = 'alert alert-' + (alert.type || 'warning');
+                div.textContent = alert.message || '';
+                alertsDiv.appendChild(div);
+            });
+        }
+
+        // Show gout indicator alert
+        if (goutResult && goutResult.message) {
+            var div = document.createElement('div');
+            div.className = 'alert alert-warning';
+            div.textContent = goutResult.message;
+            alertsDiv.appendChild(div);
+        }
     },
 
     resetForm() {
