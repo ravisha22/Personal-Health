@@ -1,7 +1,9 @@
 // utils.js — Date formatting, validation, calculations
 const Utils = {
   // Format date as YYYY-MM-DD
-  dateStr(d = new Date()) {
+  dateStr(d) {
+    if (!d) return new Date().toISOString().split('T')[0];
+    if (typeof d === 'string') return d.split('T')[0];
     return d.toISOString().split('T')[0];
   },
 

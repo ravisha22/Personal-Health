@@ -1,0 +1,27 @@
+{
+  "name": "personal-health",
+  "version": "1.0.0",
+  "description": "A personal health tracking web app built as a companion tool alongside real doctor consultations. Track vitals, pain, gout flares, exercise, diet, medications, and goals — all stored locally on your device.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravisha22/Personal-Health.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ravisha22/Personal-Health/issues"
+  },
+  "homepage": "https://github.com/ravisha22/Personal-Health#readme",
+  "devDependencies": {
+    "playwright": "^1.59.1"
+  }
+}

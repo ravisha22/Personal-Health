@@ -68,8 +68,13 @@ const Store = {
   },
 
   async getLatest(table, count = 1) {
-    const all = await db[table].orderBy('date').reverse().limit(count).toArray();
-    return count === 1 ? all[0] || null : all;
+    if (!db[table]) return count === 1 ? null : [];
+    try {
+      const all = await db[table].orderBy('date').reverse().limit(count).toArray();
+      return count === 1 ? all[0] || null : all;
+    } catch(e) {
+      return count === 1 ? null : [];
+    }
   },
 
   // ===== Vitals shortcuts =====
@@ -171,9 +176,10 @@ const Store = {
     ];
     for (const t of tables) {
       try {
+        if (!db[t.name]) continue;
         const items = await db[t.name].orderBy('date').reverse().limit(3).toArray();
         items.forEach(i => results.push({ ...i, _type: t.type }));
-      } catch(e) { /* skip if table empty */ }
+      } catch(e) { /* skip errors — table might be empty or not indexed */ }
     }
     results.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
     return results.slice(0, count);

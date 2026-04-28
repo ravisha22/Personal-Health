@@ -121,7 +121,7 @@ App.register('reference', {
         </div>
         
         <div class="grid grid-2 gap-2">
-          ${(foods[category.key] || []).map(food => `
+          ${((foods[category.key] || {}).items || []).map(food => `
             <div class="p-3 border rounded bg-gray-50">
               <div class="text-sm">${Utils.escapeHtml(food)}</div>
             </div>
@@ -138,25 +138,25 @@ App.register('reference', {
     const interactions = DrugInteractions.interactions;
 
     container.innerHTML = interactions.map(interaction => {
-      const riskColor = interaction.severity === 'high' ? 'tag-red' : 
-                       interaction.severity === 'moderate' ? 'tag-yellow' : 'tag-blue';
+      const riskColor = interaction.risk === 'high' ? 'tag-red' : 
+                       interaction.risk === 'moderate' ? 'tag-yellow' : 
+                       interaction.risk === 'beneficial' ? 'tag-green' : 'tag-blue';
       
       return `
         <div class="card mb-4">
           <div class="card-header">
             <div class="flex justify-between items-center">
-              <h4 class="font-semibold">${Utils.escapeHtml(interaction.drugs.join(' + '))}</h4>
-              <span class="tag ${riskColor}">${interaction.severity.toUpperCase()}</span>
+              <h4 class="font-semibold">${Utils.escapeHtml(interaction.category)}</h4>
+              <span class="tag ${riskColor}">${(interaction.risk || 'info').toUpperCase()}</span>
             </div>
           </div>
-          <div class="card-body">
-            <p class="text-sm mb-2">${Utils.escapeHtml(interaction.description)}</p>
-            ${interaction.precautions ? `
-              <div class="alert alert-info">
-                <strong>Precautions:</strong> ${Utils.escapeHtml(interaction.precautions)}
-              </div>
-            ` : ''}
-          </div>
+          <p class="text-sm text-muted mb-2">${Utils.escapeHtml(interaction.drugs.join(', '))}</p>
+          <p class="text-sm mb-2">${Utils.escapeHtml(interaction.warning)}</p>
+          ${interaction.suggestion ? `
+            <div class="alert alert-info">
+              <strong>Suggestion:</strong> ${Utils.escapeHtml(interaction.suggestion)}
+            </div>
+          ` : ''}
         </div>
       `;
     }).join('');
@@ -172,11 +172,11 @@ App.register('reference', {
         ${scale.map((level, index) => `
           <div class="flex items-center gap-4 p-3 border rounded">
             <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm" 
-                 style="background-color: ${Utils.painColor(index)}">
+                 style="background-color: var(--color-${Utils.painColor(index) === 'green' ? 'success' : Utils.painColor(index) === 'yellow' ? 'warning' : 'danger'})">>
               ${index}
             </div>
             <div>
-              <div class="font-semibold">${level.name}</div>
+              <div class="font-semibold">${level.label}</div>
               <div class="text-sm text-muted">${level.description}</div>
             </div>
           </div>
@@ -189,18 +189,10 @@ App.register('reference', {
     const painTypes = PainReference.painTypes;
 
     typesContainer.innerHTML = `
-      <div class="grid gap-4">
-        ${Object.entries(painTypes).map(([type, info]) => `
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">${type}</h4>
-            </div>
-            <div class="card-body">
-              <p class="text-sm mb-2">${info.description}</p>
-              <div class="text-xs text-muted">
-                <strong>Examples:</strong> ${info.examples.join(', ')}
-              </div>
-            </div>
+      <div class="grid grid-2 gap-3">
+        ${painTypes.map(pt => `
+          <div class="card" style="padding:var(--space-3)">
+            <span class="font-semibold">${Utils.escapeHtml(pt.label)}</span>
           </div>
         `).join('')}
       </div>
@@ -208,27 +200,23 @@ App.register('reference', {
 
     // Traffic Light System
     const trafficContainer = document.getElementById('traffic-light-content');
-    const trafficLight = PainReference.trafficLight;
+    const tl = PainReference.trafficLight;
 
     trafficContainer.innerHTML = `
-      <div class="space-y-4">
-        ${trafficLight.map(level => {
-          const colorClass = level.color === 'green' ? 'alert-success' : 
-                           level.color === 'yellow' ? 'alert-warning' : 'alert-danger';
-          
-          return `
-            <div class="alert ${colorClass}">
-              <div class="flex items-center gap-3 mb-2">
-                <div class="w-6 h-6 rounded-full" style="background-color: ${level.color}"></div>
-                <strong>${level.level}</strong>
-              </div>
-              <p class="mb-2">${level.description}</p>
-              <div class="text-sm">
-                <strong>Action:</strong> ${level.action}
-              </div>
-            </div>
-          `;
-        }).join('')}
+      <div class="alert alert-success mb-4">
+        <strong>🟢 ${tl.green.label} (${tl.green.range}/10)</strong>
+        <p class="text-sm mt-2">${tl.green.description}</p>
+        <p class="text-sm mt-2"><strong>Action:</strong> ${tl.green.action}</p>
+      </div>
+      <div class="alert alert-warning mb-4">
+        <strong>🟡 ${tl.yellow.label} (${tl.yellow.range}/10)</strong>
+        <p class="text-sm mt-2">${tl.yellow.description}</p>
+        <p class="text-sm mt-2"><strong>Action:</strong> ${tl.yellow.action}</p>
+      </div>
+      <div class="alert alert-danger mb-4">
+        <strong>🔴 ${tl.red.label} (${tl.red.range}/10)</strong>
+        <p class="text-sm mt-2">${tl.red.description}</p>
+        <p class="text-sm mt-2"><strong>Action:</strong> ${tl.red.action}</p>
       </div>
     `;
   },
