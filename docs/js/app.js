@@ -31,10 +31,9 @@ const App = {
   },
 
   // Initialize the app
-  init() {
+  async init() {
     // Auth gate
     if (!this.checkAuth()) {
-      // Leave decoy visible, don't start the app
       return;
     }
 
@@ -49,6 +48,9 @@ const App = {
       document.querySelector('link[rel="icon"]').href =
         "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>";
     } catch(e) {}
+
+    // Auto-provision profile if not onboarded — must complete before navigation
+    await this.ensureProfile();
 
     // Listen for hash changes
     window.addEventListener('hashchange', () => this.navigate());
@@ -138,6 +140,59 @@ const App = {
       item.classList.toggle('active', itemRoute === route ||
         (route && route.startsWith('log') && itemRoute === 'log'));
     });
+  },
+
+  // Auto-provision profile from intake data — skip onboarding entirely
+  async ensureProfile() {
+    if (Utils.isOnboarded()) return;
+
+    try {
+      await Store.saveProfile({
+        name: 'Ravi',
+        dob: '1983-12-01',
+        height: '180',
+        gender: 'male',
+        units: 'metric',
+        conditions: ['Gout', 'High Cholesterol', 'Hypertension'],
+        primaryGoal: 'Sustainable Weight Loss',
+        exerciseLimitations: 'Gout in left ankle and right knee — avoid twisting motions. Abundance of caution with these joints.',
+        doctorClearance: true,
+        preferredExerciseTime: 'Flexible',
+        currentWeight: 133,
+        checkinFrequency: 'daily',
+        pastChallenges: 'Job stress, busy schedule, laziness, addictive eating patterns. Weekend overeating. Phone disrupting sleep.',
+        doctors: [
+          { name: 'GP', specialty: 'GP', nextAppt: '' },
+          { name: 'Rheumatologist', specialty: 'Rheumatologist', nextAppt: '' },
+          { name: 'Cardiologist', specialty: 'Cardiologist', nextAppt: '' }
+        ]
+      });
+
+      // Medications
+      var meds = [
+        { name: 'Tazloc-AM', dose: '1 tablet', condition: 'Hypertension', schedule: 'Morning', active: 1, doseHistory: [{ date: Utils.dateStr(), dose: '1 tablet', reason: 'Initial' }] },
+        { name: 'Allopurinol', dose: '600mg', condition: 'Gout', schedule: 'Morning', active: 1, doseHistory: [{ date: Utils.dateStr(), dose: '600mg', reason: 'Initial' }] },
+        { name: 'Nebistar', dose: '5mg', condition: 'Hypertension', schedule: 'Night', active: 1, doseHistory: [{ date: Utils.dateStr(), dose: '5mg', reason: 'Initial' }] },
+        { name: 'Lipaglyn', dose: '1 tablet', condition: 'High Cholesterol', schedule: 'Night', active: 1, doseHistory: [{ date: Utils.dateStr(), dose: '1 tablet', reason: 'Initial' }] }
+      ];
+      for (var i = 0; i < meds.length; i++) {
+        await Store.add('medications', meds[i]);
+      }
+
+      // Initial weight vital
+      await Store.addVital({ type: 'weight', value: 133, displayValue: 133, displayUnit: 'kg', date: Utils.dateStr() });
+
+      // Initial BP
+      await Store.addVital({ type: 'bp', systolic: 125, diastolic: 85, date: Utils.dateStr() });
+
+      // Set program start date
+      Utils.setSetting('program_start_date', Utils.dateStr());
+      Utils.setSetting('units', 'metric');
+      Utils.setSetting('onboarded', true);
+
+    } catch(e) {
+      console.error('Auto-provision error:', e);
+    }
   },
 
   // Navigate programmatically
